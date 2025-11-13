@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cuestionario LEFS</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            background-color: #f0f7f0;
+            color: #333;
+            padding: 20px;
+        }
+        h1 {
+            color: #2e8b57; /* SeaGreen */
+            text-align: center;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background-color: #fff;
+            box-shadow: 0 2px 3px rgba(0,0,0,0.1);
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+        thead {
+            background-color: #4CAF50; /* Green */
+            color: white;
+        }
+        th {
+            text-align: center;
+        }
+        th:not(:first-child), td:not(:first-child) {
+            width: 15%; /* Adjust percentage as needed */
+        }
+        td:not(:first-child) {
+            text-align: center;
+        }
+        tbody tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        tbody tr:hover {
+            background-color: #e8f5e9; /* Light Green on hover */
+        }
+        button {
+            padding: 10px 20px;
+            border: none;
+            color: white;
+            cursor: pointer;
+            font-size: 16px;
+            border-radius: 5px;
+            margin: 10px 5px;
+        }
+        #calculate-btn {
+            background-color: #4CAF50; /* Green */
+        }
+        #calculate-btn:hover {
+            background-color: #45a049;
+        }
+        #export-pdf-btn {
+            background-color: #388E3C; /* Darker Green */
+        }
+        #export-pdf-btn:hover {
+            background-color: #2e7d32;
+        }
+        #result {
+            margin-top: 20px;
+            font-size: 18px;
+            font-weight: bold;
+            color: #2e8b57;
+            text-align: center;
+            padding: 15px;
+            background-color: #e8f5e9;
+            border: 1px solid #4CAF50;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="content">
+        <h1>Cuestionario LEFS</h1>
+    <table id="lefs-table">
+        <thead>
+            <tr>
+                <th>Actividades</th>
+                <th>Extrema dificultad o incapaz de realizar la actividad</th>
+                <th>Bastante Dificultad</th>
+                <th>Dificultad Moderada</th>
+                <th>Un poco de Dificultad</th>
+                <th>Sin dificultad</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr><td>1) Cualquier trabajo usual, trabajo domestico, o actividades de la escuela.</td><td><input type="radio" name="q1" value="0"></td><td><input type="radio" name="q1" value="1"></td><td><input type="radio" name="q1" value="2"></td><td><input type="radio" name="q1" value="3"></td><td><input type="radio" name="q1" value="4"></td></tr>
+            <tr><td>2) Sus pasatiempos usuales, actividades recreativas o deportivas.</td><td><input type="radio" name="q2" value="0"></td><td><input type="radio" name="q2" value="1"></td><td><input type="radio" name="q2" value="2"></td><td><input type="radio" name="q2" value="3"></td><td><input type="radio" name="q2" value="4"></td></tr>
+            <tr><td>3) Entrar o salir del baño.</td><td><input type="radio" name="q3" value="0"></td><td><input type="radio" name="q3" value="1"></td><td><input type="radio" name="q3" value="2"></td><td><input type="radio" name="q3" value="3"></td><td><input type="radio" name="q3" value="4"></td></tr>
+            <tr><td>4) Andar entre cuartos.</td><td><input type="radio" name="q4" value="0"></td><td><input type="radio" name="q4" value="1"></td><td><input type="radio" name="q4" value="2"></td><td><input type="radio" name="q4" value="3"></td><td><input type="radio" name="q4" value="4"></td></tr>
+            <tr><td>5) Poniendo sus zapatos o los calcetines.</td><td><input type="radio" name="q5" value="0"></td><td><input type="radio" name="q5" value="1"></td><td><input type="radio" name="q5" value="2"></td><td><input type="radio" name="q5" value="3"></td><td><input type="radio" name="q5" value="4"></td></tr>
+            <tr><td>6) Ponerse en cuclillas.</td><td><input type="radio" name="q6" value="0"></td><td><input type="radio" name="q6" value="1"></td><td><input type="radio" name="q6" value="2"></td><td><input type="radio" name="q6" value="3"></td><td><input type="radio" name="q6" value="4"></td></tr>
+            <tr><td>7) Levantar un objeto, como una bolsa de comestibles del piso.</td><td><input type="radio" name="q7" value="0"></td><td><input type="radio" name="q7" value="1"></td><td><input type="radio" name="q7" value="2"></td><td><input type="radio" name="q7" value="3"></td><td><input type="radio" name="q7" value="4"></td></tr>
+            <tr><td>8) Realizar actividades ligeras domesticas.</td><td><input type="radio" name="q8" value="0"></td><td><input type="radio" name="q8" value="1"></td><td><input type="radio" name="q8" value="2"></td><td><input type="radio" name="q8" value="3"></td><td><input type="radio" name="q8" value="4"></td></tr>
+            <tr><td>9) Realizar actividades pesadas domesticas.</td><td><input type="radio" name="q9" value="0"></td><td><input type="radio" name="q9" value="1"></td><td><input type="radio" name="q9" value="2"></td><td><input type="radio" name="q9" value="3"></td><td><input type="radio" name="q9" value="4"></td></tr>
+            <tr><td>10) Entrar o salir de un coche.</td><td><input type="radio" name="q10" value="0"></td><td><input type="radio" name="q10" value="1"></td><td><input type="radio" name="q10" value="2"></td><td><input type="radio" name="q10" value="3"></td><td><input type="radio" name="q10" value="4"></td></tr>
+            <tr><td>11) Caminar 2 cuadras.</td><td><input type="radio" name="q11" value="0"></td><td><input type="radio" name="q11" value="1"></td><td><input type="radio" name="q11" value="2"></td><td><input type="radio" name="q11" value="3"></td><td><input type="radio" name="q11" value="4"></td></tr>
+            <tr><td>12) Caminar una milla.</td><td><input type="radio" name="q12" value="0"></td><td><input type="radio" name="q12" value="1"></td><td><input type="radio" name="q12" value="2"></td><td><input type="radio" name="q12" value="3"></td><td><input type="radio" name="q12" value="4"></td></tr>
+            <tr><td>13) Subir o bajar 10 escalones (cerca de 1 escalera completa).</td><td><input type="radio" name="q13" value="0"></td><td><input type="radio" name="q13" value="1"></td><td><input type="radio" name="q13" value="2"></td><td><input type="radio" name="q13" value="3"></td><td><input type="radio" name="q13" value="4"></td></tr>
+            <tr><td>14) Estar de pie por 1 hora.</td><td><input type="radio" name="q14" value="0"></td><td><input type="radio" name="q14" value="1"></td><td><input type="radio" name="q14" value="2"></td><td><input type="radio" name="q14" value="3"></td><td><input type="radio" name="q14" value="4"></td></tr>
+            <tr><td>15) Estar sentado por 1 hora.</td><td><input type="radio" name="q15" value="0"></td><td><input type="radio" name="q15" value="1"></td><td><input type="radio" name="q15" value="2"></td><td><input type="radio" name="q15" value="3"></td><td><input type="radio" name="q15" value="4"></td></tr>
+            <tr><td>16) Correr sobre suelo plano.</td><td><input type="radio" name="q16" value="0"></td><td><input type="radio" name="q16" value="1"></td><td><input type="radio" name="q16" value="2"></td><td><input type="radio" name="q16" value="3"></td><td><input type="radio" name="q16" value="4"></td></tr>
+            <tr><td>17) Correr sobre suelo desigual.</td><td><input type="radio" name="q17" value="0"></td><td><input type="radio" name="q17" value="1"></td><td><input type="radio" name="q17" value="2"></td><td><input type="radio" name="q17" value="3"></td><td><input type="radio" name="q17" value="4"></td></tr>
+            <tr><td>18) Hacer vueltas bruscas cuando corre rápidamente.</td><td><input type="radio" name="q18" value="0"></td><td><input type="radio" name="q18" value="1"></td><td><input type="radio" name="q18" value="2"></td><td><input type="radio" name="q18" value="3"></td><td><input type="radio" name="q18" value="4"></td></tr>
+            <tr><td>19) Saltar.</td><td><input type="radio" name="q19" value="0"></td><td><input type="radio" name="q19" value="1"></td><td><input type="radio" name="q19" value="2"></td><td><input type="radio" name="q19" value="3"></td><td><input type="radio" name="q19" value="4"></td></tr>
+            <tr><td>20) Darse la vuelta en la cama.</td><td><input type="radio" name="q20" value="0"></td><td><input type="radio" name="q20" value="1"></td><td><input type="radio" name="q20" value="2"></td><td><input type="radio" name="q20" value="3"></td><td><input type="radio" name="q20" value="4"></td></tr>
+        </tbody>
+    </table>
+
+    <button id="calculate-btn">Calcular resultado</button>
+    <button id="export-pdf-btn">Exportar como pdf</button>
+
+    <div id="result" style="display: none;"></div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
+    <script>
+        document.getElementById('calculate-btn').addEventListener('click', () => {
+            let totalScore = 0;
+            const totalQuestions = 20;
+            for (let i = 1; i <= totalQuestions; i++) {
+                const radios = document.getElementsByName('q' + i);
+                for (const radio of radios) {
+                    if (radio.checked) {
+                        totalScore += parseInt(radio.value);
+                        break;
+                    }
+                }
+            }
+
+            const maxScore = 80;
+            const percentage = ((totalScore / maxScore) * 100).toFixed(2);
+
+            const resultDiv = document.getElementById('result');
+            resultDiv.innerHTML = `<h3>Índice de funcionalidad de extremidad inferior</h3>
+                                   <p>Puntuación: ${totalScore} / ${maxScore}</p>
+                                   <p>Porcentaje: ${percentage}%</p>`;
+            resultDiv.style.display = 'block';
+        });
+
+        document.getElementById('export-pdf-btn').addEventListener('click', () => {
+            const { jsPDF } = window.jspdf;
+            const content = document.getElementById('content');
+
+            html2canvas(content, { scale: 2 }).then(canvas => {
+                const imgData = canvas.toDataURL('image/png');
+                const pdf = new jsPDF({
+                    orientation: 'p',
+                    unit: 'mm',
+                    format: 'a4'
+                });
+
+                const pdfWidth = pdf.internal.pageSize.getWidth();
+                const pdfHeight = pdf.internal.pageSize.getHeight();
+                const canvasWidth = canvas.width;
+                const canvasHeight = canvas.height;
+                const canvasAspectRatio = canvasWidth / canvasHeight;
+                const pdfAspectRatio = pdfWidth / pdfHeight;
+
+                let finalCanvasWidth, finalCanvasHeight;
+
+                // Adjust canvas size to fit into the PDF page with narrow margins
+                if (canvasAspectRatio > pdfAspectRatio) {
+                    finalCanvasWidth = pdfWidth - 20; // 10mm margin on each side
+                    finalCanvasHeight = finalCanvasWidth / canvasAspectRatio;
+                } else {
+                    finalCanvasHeight = pdfHeight - 20; // 10mm margin on each side
+                    finalCanvasWidth = finalCanvasHeight * canvasAspectRatio;
+                }
+
+                const x = (pdfWidth - finalCanvasWidth) / 2;
+                const y = 10; // 10mm top margin
+
+                pdf.addImage(imgData, 'PNG', x, y, finalCanvasWidth, finalCanvasHeight);
+                pdf.save('cuestionario-lefs.pdf');
+            });
+        });
+    </script>
+
+</body>
+</html>

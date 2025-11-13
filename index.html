@@ -1,0 +1,1186 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ficha Clínica</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container-fluid mt-4">
+        <div class="row">
+            <div class="col-md-2 sidebar">
+                <div class="d-flex flex-column text-center">
+                    <img src="logo.png" alt="Logo" class="img-fluid mb-3">
+                    <button id="nueva-ficha-btn" class="btn btn-primary mb-2">Nueva ficha</button>
+                    <button id="exportar-json-btn" class="btn btn-success mb-2">Exportar Ficha (.json)</button>
+                    <button id="importar-json-btn" class="btn btn-info">Importar Ficha (.json)</button>
+                    <div class="text-center mt-3">
+                        <i class="bi bi-person-circle user-icon text-muted"></i>
+                    </div>
+                    <div class="text-center mt-3">
+                        <p class="mb-0 text-muted small">Felipe Méndez Salgado</p>
+                        <p class="mb-0 text-muted small">Kinesiólogo y Quiropráctico</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de confirmación para Nueva ficha -->
+    <div class="modal fade" id="confirmNuevaFichaModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Confirmar nueva ficha</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Esta acción limpiará todos los campos actuales. ¿Deseas continuar?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" id="confirmNuevaFichaBtn" class="btn btn-primary">Aceptar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+            <div class="col-md-10">
+                 <div id="banner-container">
+                    <div class="banner-left">
+                        <h1 class="banner-title">Ficha Clínica Kinesiología y Quiropraxia</h1>
+                        <img src="spine verde.png" alt="Columna vertebral" class="banner-left-spine">
+                    </div>
+                    <div class="banner-right">
+                        <div class="banner-right-top">
+                            <h2 class="banner-right-title">Centro Salud Vida Sana Austral</h2>
+                            <p class="banner-right-subtitle">Acupuntura - Kinesiología - Quiropraxia</p>
+                        </div>
+                        <div class="banner-right-bottom">
+                            <p>
+                                centrovidasana.cl
+                                <i class="bi bi-telephone-fill phone-icon"></i>
+                                +569 8939 1929 | +56 9 7388 8910
+                            </p>
+                        </div>
+                    </div>
+                 </div>
+                <ul class="nav nav-tabs" id="myTab" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link active" id="datos-personales-tab" data-bs-toggle="tab" data-bs-target="#datos-personales" type="button" role="tab" aria-controls="datos-personales" aria-selected="true">Datos Personales</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="anamnesis-remota-tab" data-bs-toggle="tab" data-bs-target="#anamnesis-remota" type="button" role="tab" aria-controls="anamnesis-remota" aria-selected="false">Anamnesis Remota</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="exploracion-general-tab" data-bs-toggle="tab" data-bs-target="#exploracion-general" type="button" role="tab" aria-controls="exploracion-general" aria-selected="false">Exploración general</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="exploracion-analitica-tab" data-bs-toggle="tab" data-bs-target="#exploracion-analitica" type="button" role="tab" aria-controls="exploracion-analitica" aria-selected="false">Exploración Analítica</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="exploracion-vestibular-tab" data-bs-toggle="tab" data-bs-target="#exploracion-vestibular" type="button" role="tab" aria-controls="exploracion-vestibular" aria-selected="false">Exploración vestibular</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="imagenologia-tab" data-bs-toggle="tab" data-bs-target="#imagenologia" type="button" role="tab" aria-controls="imagenologia" aria-selected="false">Imagenología</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="tratamiento-tab" data-bs-toggle="tab" data-bs-target="#tratamiento" type="button" role="tab" aria-controls="tratamiento" aria-selected="false">Tratamiento</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="plantillas-ortopedicas-tab" data-bs-toggle="tab" data-bs-target="#plantillas-ortopedicas" type="button" role="tab" aria-controls="plantillas-ortopedicas" aria-selected="false">Plantillas ortopédicas</button>
+            </li>
+        </ul>
+        <div class="tab-content" id="myTabContent">
+            <div class="tab-pane fade show active" id="datos-personales" role="tabpanel" aria-labelledby="datos-personales-tab">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Datos Personales</h5>
+                        <form class="row g-3">
+                            <div class="col-md-6">
+                                <label for="nombre" class="form-label">Nombre:</label>
+                                <input type="text" class="form-control" id="nombre" name="nombre">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="rut" class="form-label">RUT:</label>
+                                <input type="text" class="form-control" id="rut" name="rut">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="fecha_ingreso" class="form-label">Fecha de ingreso:</label>
+                                <input type="date" class="form-control" id="fecha_ingreso" name="fecha_ingreso">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="ocupacion" class="form-label">Ocupación:</label>
+                                <input type="text" class="form-control" id="ocupacion" name="ocupacion">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="fecha_nacimiento" class="form-label">Fecha de nacimiento:</label>
+                                <input type="date" class="form-control" id="fecha_nacimiento" name="fecha_nacimiento">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="edad" class="form-label">Edad:</label>
+                                <input type="number" class="form-control" id="edad" name="edad" readonly>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="telefono" class="form-label">Teléfono:</label>
+                                <input type="tel" class="form-control" id="telefono" name="telefono">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="correo" class="form-label">Correo:</label>
+                                <input type="email" class="form-control" id="correo" name="correo">
+                            </div>
+                            <div class="col-12">
+                                <label for="direccion" class="form-label">Dirección:</label>
+                                <input type="text" class="form-control" id="direccion" name="direccion">
+                            </div>
+                            <div class="col-12">
+                                <hr>
+                                <h5>Consentimiento Informado</h5>
+                                <p><strong>Consentimiento para Tratamiento Kinésico y Quiropráctico</strong></p>
+                                <p>Al marcar esta casilla, acepto y declaro lo siguiente:</p>
+                                <ol>
+                                    <li><strong>Naturaleza del Tratamiento:</strong> Comprendo que el tratamiento puede incluir una combinación de técnicas tales como: manipulaciones articulares, ejercicio terapéutico, uso de agentes físicos (ej. calor, frío, electroterapia) y masoterapia.</li>
+                                    <li><strong>Beneficios Esperados:</strong> Entiendo que los beneficios del tratamiento buscan el alivio del dolor, la mejora de la flexibilidad, un mayor rango de movimiento y la optimización de la función neuromuscular, todo dentro de mi contexto personal de salud.</li>
+                                    <li><strong>Riesgos y Seguridad:</strong> He sido informado de que estos tratamientos son reconocidos como seguros y efectivos. Sin embargo, como con cualquier intervención de salud, existen posibles molestias.
+                                        <ul>
+                                            <li><strong>Molestias Comunes:</strong> Es normal experimentar dolor muscular (similar al de hacer ejercicio) o cansancio durante las 48 a 72 horas posteriores a la sesión. Ocasionalmente, pueden presentarse leves mareos o hematomas (moretones) dependiendo del tipo de intervención. Entiendo que estas son reacciones temporales y parte normal del proceso de recuperación.</li>
+                                            <li><strong>Protocolo de Seguridad:</strong> Se me ha explicado que, en caso de que el profesional sospeche un riesgo mayor, se modificará la intervención por una más apropiada al contexto del paciente, no se realizará la intervención en la zona afectada y/o seré derivado al profesional correspondiente.</li>
+                                            <li><strong>Contraindicaciones principales:</strong> Las principales son: sospecha de tumor, fractura o luxación, infección ósea u articular, cuadros retumatológicos agudos,condiciones neurológicas graves, inestabilidad articular, embarazo (ésta última no es una contraindicación por si misma, pero no se tiene la especialidad para su manejo).</li>
+                                        </ul>
+                                    </li>
+                                    <li><strong>Mi Responsabilidad como Paciente:</strong> Me comprometo a notificar al terapeuta de manera veraz y completa sobre mi historial clínico, incluyendo medicamentos que utilizo, enfermedades anteriores o preexistentes, y cualquier otra condición clínica relevante para el tratamiento.</li>
+                                    <li><strong>Confidencialidad:</strong> Entiendo que toda la información de mi historia clínica y los detalles de mi tratamiento serán manejados de forma estrictamente confidencial.</li>
+                                    <li><strong>Declaración de Consentimiento:</strong> Declaro que he leído y comprendido este documento en su totalidad. Se me ha explicado la naturaleza y el propósito del tratamiento. Mis preguntas han sido contestadas satisfactoriamente, por lo que doy mi autorización voluntaria para iniciar el tratamiento.</li>
+                                </ol>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="consentimiento_declaracion" name="consentimiento_declaracion">
+                                    <label class="form-check-label" for="consentimiento_declaracion">Doy mi autorización para iniciar la evaluación y tratamiento.</label>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane fade" id="exploracion-analitica" role="tabpanel" aria-labelledby="exploracion-analitica-tab">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Exploración Analítica</h5>
+                        <div class="card">
+                            <div class="card-body">
+                                <h6 class="card-title">Exploración ortopédica</h6>
+                                <form class="row g-3">
+                                    <div class="col-12">
+                                        <label for="arom_descripcion" class="form-label">AROM:</label>
+                                        <textarea class="form-control" id="arom_descripcion" name="arom_descripcion" rows="3"></textarea>
+                                    </div>
+                                    <div class="col-12">
+                                        <label for="arom_archivo" class="form-label">Importar archivo (PNG o JPG):</label>
+                                        <input type="file" class="form-control" id="arom_archivo" name="arom_archivo" accept="image/png, image/jpeg">
+                                        <img src="" alt="Vista previa de la imagen de AROM" class="img-fluid mt-2 d-none" style="max-height: 200px;">
+                                    </div>
+                                    <div class="col-12">
+                                        <label for="prom_descripcion" class="form-label">PROM:</label>
+                                        <textarea class="form-control" id="prom_descripcion" name="prom_descripcion" rows="3"></textarea>
+                                    </div>
+                                    <div class="col-12">
+                                        <label for="prom_archivo" class="form-label">Importar archivo (PNG o JPG):</label>
+                                        <input type="file" class="form-control" id="prom_archivo" name="prom_archivo" accept="image/png, image/jpeg">
+                                        <img src="" alt="Vista previa de la imagen de PROM" class="img-fluid mt-2 d-none" style="max-height: 200px;">
+                                    </div>
+                                    <div class="col-12">
+                                        <label for="artrocinematica" class="form-label">Artrocinemática:</label>
+                                        <textarea class="form-control" id="artrocinematica" name="artrocinematica" rows="3"></textarea>
+                                    </div>
+                                    <div class="col-12">
+                                        <label for="pruebas_musculares" class="form-label">Pruebas musculares:</label>
+                                        <textarea class="form-control" id="pruebas_musculares" name="pruebas_musculares" rows="3"></textarea>
+                                    </div>
+                                    <div class="col-12">
+                                        <label for="pruebas_ortopedicas" class="form-label">Pruebas ortopédicas:</label>
+                                        <textarea class="form-control" id="pruebas_ortopedicas" name="pruebas_ortopedicas" rows="3"></textarea>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="card mt-3">
+                            <div class="card-body">
+                                <h6 class="card-title">Exploración neuroortopédica</h6>
+                                <form class="row g-3">
+                                    <div class="col-12">
+                                        <label for="neurodinamica" class="form-label">Neurodinámica:</label>
+                                        <textarea class="form-control" id="neurodinamica" name="neurodinamica" rows="3"></textarea>
+                                    </div>
+                                    <div class="col-12">
+                                        <label for="reflejos" class="form-label">Reflejos:</label>
+                                        <textarea class="form-control" id="reflejos" name="reflejos" rows="3"></textarea>
+                                    </div>
+                                    <div class="col-12">
+                                        <label for="pruebas_neuroortopedicas" class="form-label">Pruebas neuroortopédicas:</label>
+                                        <textarea class="form-control" id="pruebas_neuroortopedicas" name="pruebas_neuroortopedicas" rows="3"></textarea>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane fade" id="anamnesis-remota" role="tabpanel" aria-labelledby="anamnesis-remota-tab">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Anamnesis Remota</h5>
+                        <form>
+                            <div class="mb-3">
+                                <label for="habitos" class="form-label">Hábitos:</label>
+                                <textarea class="form-control" id="habitos" name="habitos" rows="3"></textarea>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label d-block">Comorbilidades:</label>
+                                <div class="row">
+                                    <!-- Column 1 -->
+                                    <div class="col-md-4">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="comorbilidad_hta" name="comorbilidad_hta">
+                                            <label class="form-check-label" for="comorbilidad_hta">HTA o Cardiopatía</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="comorbilidad_dm" name="comorbilidad_dm">
+                                            <label class="form-check-label" for="comorbilidad_dm">Diabetes Mellitus</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="comorbilidad_dislipidemia" name="comorbilidad_dislipidemia">
+                                            <label class="form-check-label" for="comorbilidad_dislipidemia">Dislipidemia</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="comorbilidad_artrosis" name="comorbilidad_artrosis">
+                                            <label class="form-check-label" for="comorbilidad_artrosis">Artrosis</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="comorbilidad_alergias" name="comorbilidad_alergias">
+                                            <label class="form-check-label" for="comorbilidad_alergias">Alergias</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="comorbilidad_epoc" name="comorbilidad_epoc">
+                                            <label class="form-check-label" for="comorbilidad_epoc">EPOC</label>
+                                        </div>
+                                    </div>
+                                    <!-- Column 2 -->
+                                    <div class="col-md-4">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="comorbilidad_asma" name="comorbilidad_asma">
+                                            <label class="form-check-label" for="comorbilidad_asma">Asma</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="comorbilidad_cancer" name="comorbilidad_cancer">
+                                            <label class="form-check-label" for="comorbilidad_cancer">Cáncer</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="comorbilidad_cognitivo" name="comorbilidad_cognitivo">
+                                            <label class="form-check-label" for="comorbilidad_cognitivo">Trastorno cognitivo</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="comorbilidad_sedentarismo" name="comorbilidad_sedentarismo">
+                                            <label class="form-check-label" for="comorbilidad_sedentarismo">Sedentarismo</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="comorbilidad_artritis" name="comorbilidad_artritis">
+                                            <label class="form-check-label" for="comorbilidad_artritis">Artritis o reumatismo</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="comorbilidad_auditiva" name="comorbilidad_auditiva">
+                                            <label class="form-check-label" for="comorbilidad_auditiva">Alteración auditiva</label>
+                                        </div>
+                                    </div>
+                                    <!-- Column 3 -->
+                                    <div class="col-md-4">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="comorbilidad_visual" name="comorbilidad_visual">
+                                            <label class="form-check-label" for="comorbilidad_visual">Alteración visual</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="comorbilidad_equilibrio" name="comorbilidad_equilibrio">
+                                            <label class="form-check-label" for="comorbilidad_equilibrio">Alteración equilibrio</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="comorbilidad_incontinencia" name="comorbilidad_incontinencia">
+                                            <label class="form-check-label" for="comorbilidad_incontinencia">Incontinencia</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="comorbilidad_ansiedad" name="comorbilidad_ansiedad">
+                                            <label class="form-check-label" for="comorbilidad_ansiedad">Ansiedad</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="comorbilidad_depresion" name="comorbilidad_depresion">
+                                            <label class="form-check-label" for="comorbilidad_depresion">Depresión</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="comorbilidad_hipohipertiroidism" name="comorbilidad_hipohipertiroidismn">
+                                            <label class="form-check-label" for="comorbilidad_hipohipertiroidismo">Hipo/hipertiroidismo</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Other comorbidities -->
+                                <div class="row mt-2">
+                                    <div class="col-md-6">
+                                        <div class="input-group">
+                                            <div class="input-group-text">
+                                                <input class="form-check-input mt-0" type="checkbox" id="comorbilidad_otras_check" name="comorbilidad_otras_check">
+                                            </div>
+                                            <span class="input-group-text">Otras:</span>
+                                            <input type="text" class="form-control" id="comorbilidad_otras_text" name="comorbilidad_otras_text" placeholder="Especifique...">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="medicamentos" class="form-label">Medicamentos de uso actual:</label>
+                                <textarea class="form-control" id="medicamentos" name="medicamentos" rows="3"></textarea>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label d-block">Control médico asociado a comorbilidades:</label>
+                                <div class="row">
+                                    <div class="col-auto align-self-center">
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="control_medico" id="control_medico_si" value="si">
+                                            <label class="form-check-label" for="control_medico_si">Sí</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="control_medico" id="control_medico_no" value="no" checked>
+                                            <label class="form-check-label" for="control_medico_no">No</label>
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div id="control_medico_detalles" class="d-none">
+                                            <textarea class="form-control" id="control_medico_descripcion" name="control_medico_descripcion" placeholder="Especifique..." rows="1"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row mt-2 align-items-center">
+                                    <div class="col-md-auto">
+                                        <label for="fecha_ultimo_control" class="col-form-label">Fecha aproximada del último control médico:</label>
+                                    </div>
+                                    <div class="col">
+                                        <input type="text" class="form-control" id="fecha_ultimo_control" name="fecha_ultimo_control">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="cirugias" class="form-label">Cirugías:</label>
+                                <textarea class="form-control" id="cirugias" name="cirugias" rows="3"></textarea>
+                            </div>
+                            <div class="mb-3">
+                                <label for="antecedentes_familiares" class="form-label">Antecedentes familiares:</label>
+                                <textarea class="form-control" id="antecedentes_familiares" name="antecedentes_familiares" rows="3"></textarea>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane fade" id="exploracion-general" role="tabpanel" aria-labelledby="exploracion-general-tab">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Exploración general</h5>
+                        <form class="row g-3">
+                            <div class="col-12">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h6 class="card-title">Condición actual</h6>
+                                        <div class="row g-3">
+                                            <div class="col-12">
+                                                <label for="motivo_consulta" class="form-label">Motivo de consulta:</label>
+                                                <textarea class="form-control" id="motivo_consulta" name="motivo_consulta" rows="3"></textarea>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label for="fecha_inicio_sintomas" class="form-label">Fecha de inicio de síntomas:</label>
+                                                <input type="date" class="form-control" id="fecha_inicio_sintomas" name="fecha_inicio_sintomas">
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label for="diagnostico_medico" class="form-label">Diagnóstico médico:</label>
+                                                <input type="text" class="form-control" id="diagnostico_medico" name="diagnostico_medico">
+                                            </div>
+                                            <div class="col-12">
+                                                <label for="historia_motivo_consulta" class="form-label">Historia de motivo de consulta:</label>
+                                                <textarea class="form-control" id="historia_motivo_consulta" name="historia_motivo_consulta" rows="3"></textarea>
+                                            </div>
+                                            <div class="col-12">
+                                                <label class="form-label">Inicio de condición:</label>
+                                                <div class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="checkbox" id="traumatico" name="inicio_condicion" value="traumatico">
+                                                    <label class="form-check-label" for="traumatico">Traumático</label>
+                                                </div>
+                                                <div class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="checkbox" id="sobreuso" name="inicio_condicion" value="sobreuso">
+                                                    <label class="form-check-label" for="sobreuso">Sobreuso</label>
+                                                </div>
+                                                <div class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="checkbox" id="insidioso" name="inicio_condicion" value="insidioso">
+                                                    <label class="form-check-label" for="insidioso">Insidioso</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-12">
+                                                <label for="tratamientos_previos" class="form-label">Tratamientos previos:</label>
+                                                <textarea class="form-control" id="tratamientos_previos" name="tratamientos_previos" rows="3"></textarea>
+                                            </div>
+                                            <div class="col-12">
+                                                <label class="form-label">Terapia farmacológica actual:</label>
+                                                <div class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="checkbox" id="no_farmacos" name="terapia_farmacologica" value="no">
+                                                    <label class="form-check-label" for="no_farmacos">No</label>
+                                                </div>
+                                                <div class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="checkbox" id="analgesicos" name="terapia_farmacologica" value="analgesicos">
+                                                    <label class="form-check-label" for="analgesicos">Analgésicos</label>
+                                                </div>
+                                                <div class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="checkbox" id="aines" name="terapia_farmacologica" value="aines">
+                                                    <label class="form-check-label" for="aines">AINEs</label>
+                                                </div>
+                                                <div class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="checkbox" id="corticoides" name="terapia_farmacologica" value="corticoides">
+                                                    <label class="form-check-label" for="corticoides">Corticoides</label>
+                                                </div>
+                                                <div class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="checkbox" id="anticoagulantes" name="terapia_farmacologica" value="anticoagulantes">
+                                                    <label class="form-check-label" for="anticoagulantes">Anticoagulantes</label>
+                                                </div>
+                                                <div class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="checkbox" id="otros_farmacos" name="terapia_farmacologica" value="otros">
+                                                    <label class="form-check-label" for="otros_farmacos">Otros</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="card mt-3">
+                                    <div class="card-body">
+                                        <h6 class="card-title">Clasificación de dolor</h6>
+                                        <div class="row g-3">
+                                            <div class="col-12">
+                                                <label for="dolor-slider" class="form-label">Escala Visual Análoga (EVA):</label>
+                                                <div class="eva-wrapper text-center">
+                                                    <div class="slider-container">
+                                                        <input type="range" class="form-range" min="0" max="10" step="0.1" id="dolor-slider">
+                                                        <div class="slider-labels">
+                                                            <span>Dolor ausente</span>
+                                                            <span>Dolor insoportable</span>
+                                                        </div>
+                                                    </div>
+                                                    <img src="caradolor.png" alt="Caras del dolor" class="img-fluid caras-dolor mt-2">
+                                                </div>
+                                                <button type="button" id="confirmar-dolor-btn" class="btn btn-primary mt-2">Confirmar</button>
+                                                <p class="mt-2">Nivel de dolor seleccionado: <span id="dolor-seleccionado" class="d-none"></span></p>
+                                                <p class="mt-1">Escala numérica de dolor 0-10:
+                                                    <input type="number" id="eva-numerica-input" class="form-control form-control-sm d-inline-block ms-2" style="width: 90px;" min="0" max="10" step="0.1" placeholder="0-10">
+                                                </p>
+                                            </div>
+                                            <div class="col-12">
+                                                <label class="form-label">Escala verbal:</label>
+                                                <div class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="checkbox" id="dolor_leve" name="escala_verbal" value="leve">
+                                                    <label class="form-check-label" for="dolor_leve">Dolor leve</label>
+                                                </div>
+                                                <div class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="checkbox" id="dolor_moderado" name="escala_verbal" value="moderado">
+                                                    <label class="form-check-label" for="dolor_moderado">Dolor moderado</label>
+                                                </div>
+                                                <div class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="checkbox" id="dolor_severo" name="escala_verbal" value="severo">
+                                                    <label class="form-check-label" for="dolor_severo">Dolor severo</label>
+                                                </div>
+                                                <div class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="checkbox" id="dolor_insoportable" name="escala_verbal" value="insoportable">
+                                                    <label class="form-check-label" for="dolor_insoportable">Dolor insoportable</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-12">
+                                                <div class="d-flex gap-2 mb-2">
+                                                    <button type="button" id="add-descripcion-dolor-imagen-btn" class="btn btn-success">Agregar Imagen</button>
+                                                    <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#mapaDolorModal">Dibujar en mapa corporal</button>
+                                                </div>
+                                                <label for="descripcion_dolor" class="form-label">Descripción del dolor:</label>
+                                                <textarea class="form-control" id="descripcion_dolor" name="descripcion_dolor" rows="2"></textarea>
+                                            </div>
+                                            <div class="col-12">
+                                                <div id="descripcion-dolor-imagenes-container">
+                                                    <!-- Image uploaders will be added here -->
+                                                </div>
+                                            </div>
+                                            <div class="col-12">
+                                                <label for="alivio_dolor" class="form-label">Alivio de dolor:</label>
+                                                <textarea class="form-control" id="alivio_dolor" name="alivio_dolor" rows="2"></textarea>
+                                            </div>
+                                            <div class="col-12">
+                                                <label for="agravantes_dolor" class="form-label">Agravantes de dolor:</label>
+                                                <textarea class="form-control" id="agravantes_dolor" name="agravantes_dolor" rows="2"></textarea>
+                                            </div>
+                                            <div class="col-12">
+                                                <label class="form-label">Medidas fisiológicas asociadas:</label>
+                                                <div class="row">
+                                                    <div class="col-md-4">
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" type="checkbox" id="fisio_ninguna" name="medidas_fisiologicas" value="ninguna">
+                                                            <label class="form-check-label" for="fisio_ninguna">Ninguna</label>
+                                                        </div>
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" type="checkbox" id="fisio_taquicardia" name="medidas_fisiologicas" value="taquicardia">
+                                                            <label class="form-check-label" for="fisio_taquicardia">Taquicardia</label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" type="checkbox" id="fisio_hta" name="medidas_fisiologicas" value="hta">
+                                                            <label class="form-check-label" for="fisio_hta">HTA</label>
+                                                        </div>
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" type="checkbox" id="fisio_diaforesis" name="medidas_fisiologicas" value="diaforesis">
+                                                            <label class="form-check-label" for="fisio_diaforesis">Diaforesis</label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" type="checkbox" id="fisio_tension" name="medidas_fisiologicas" value="tension_muscular">
+                                                            <label class="form-check-label" for="fisio_tension">Tensión muscular</label>
+                                                        </div>
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" type="checkbox" id="fisio_nauseas" name="medidas_fisiologicas" value="nauseas_vomitos">
+                                                            <label class="form-check-label" for="fisio_nauseas">Náuseas y vómitos</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-12">
+                                                <div class="card mt-3">
+                                                    <div class="card-body">
+                                                        <h6 class="card-title">Cuestionario de Autoeficacia para el dolor (PSEQ)</h6>
+                                                        <p class="card-subtitle mb-2 text-muted">Recuerda, no se pregunta si puede o no hacer las cosas, sino que tan seguro está para hacerlo a pesar del dolor actual.</p>
+                                                        <p class="card-subtitle mb-2 text-muted">0 = Nada seguro, 6 = Totalmente seguro</p>
+
+                                                        <!-- Pregunta 1 -->
+                                                        <div class="mb-3 pseq-question">
+                                                            <label class="form-label">1) Puedo disfrutar de las cosas, a pesar del dolor.</label>
+                                                            <div class="d-flex justify-content-start pseq-options">
+                                                                <div class="form-check form-check-inline">
+                                                                    <input class="form-check-input" type="radio" name="pseq_1" id="pseq_1_0" value="0"><label class="form-check-label" for="pseq_1_0">0</label>
+                                                                </div>
+                                                                <div class="form-check form-check-inline">
+                                                                    <input class="form-check-input" type="radio" name="pseq_1" id="pseq_1_1" value="1"><label class="form-check-label" for="pseq_1_1">1</label>
+                                                                </div>
+                                                                <div class="form-check form-check-inline">
+                                                                    <input class="form-check-input" type="radio" name="pseq_1" id="pseq_1_2" value="2"><label class="form-check-label" for="pseq_1_2">2</label>
+                                                                </div>
+                                                                <div class="form-check form-check-inline">
+                                                                    <input class="form-check-input" type="radio" name="pseq_1" id="pseq_1_3" value="3"><label class="form-check-label" for="pseq_1_3">3</label>
+                                                                </div>
+                                                                <div class="form-check form-check-inline">
+                                                                    <input class="form-check-input" type="radio" name="pseq_1" id="pseq_1_4" value="4"><label class="form-check-label" for="pseq_1_4">4</label>
+                                                                </div>
+                                                                <div class="form-check form-check-inline">
+                                                                    <input class="form-check-input" type="radio" name="pseq_1" id="pseq_1_5" value="5"><label class="form-check-label" for="pseq_1_5">5</label>
+                                                                </div>
+                                                                <div class="form-check form-check-inline">
+                                                                    <input class="form-check-input" type="radio" name="pseq_1" id="pseq_1_6" value="6"><label class="form-check-label" for="pseq_1_6">6</label>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <!-- Pregunta 2 -->
+                                                        <div class="mb-3 pseq-question">
+                                                            <label class="form-label">2. Puedo hacer la mayoría de las tareas domésticas (por ejemplo, ordenar, fregar los platos, etc.), a pesar del dolor.</label>
+                                                            <div class="d-flex justify-content-start pseq-options">
+                                                                <div class="form-check form-check-inline">
+                                                                    <input class="form-check-input" type="radio" name="pseq_2" id="pseq_2_0" value="0"><label class="form-check-label" for="pseq_2_0">0</label>
+                                                                </div>
+                                                                <div class="form-check form-check-inline">
+                                                                    <input class="form-check-input" type="radio" name="pseq_2" id="pseq_2_1" value="1"><label class="form-check-label" for="pseq_2_1">1</label>
+                                                                </div>
+                                                                <div class="form-check form-check-inline">
+                                                                    <input class="form-check-input" type="radio" name="pseq_2" id="pseq_2_2" value="2"><label class="form-check-label" for="pseq_2_2">2</label>
+                                                                </div>
+                                                                <div class="form-check form-check-inline">
+                                                                    <input class="form-check-input" type="radio" name="pseq_2" id="pseq_2_3" value="3"><label class="form-check-label" for="pseq_2_3">3</label>
+                                                                </div>
+                                                                <div class="form-check form-check-inline">
+                                                                    <input class="form-check-input" type="radio" name="pseq_2" id="pseq_2_4" value="4"><label class="form-check-label" for="pseq_2_4">4</label>
+                                                                </div>
+                                                                <div class="form-check form-check-inline">
+                                                                    <input class="form-check-input" type="radio" name="pseq_2" id="pseq_2_5" value="5"><label class="form-check-label" for="pseq_2_5">5</label>
+                                                                </div>
+                                                                <div class="form-check form-check-inline">
+                                                                    <input class="form-check-input" type="radio" name="pseq_2" id="pseq_2_6" value="6"><label class="form-check-label" for="pseq_2_6">6</label>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <!-- Pregunta 3 -->
+                                                        <div class="mb-3 pseq-question">
+                                                            <label class="form-label">3. Puedo relacionarme con mis amigos o familiares con la misma frecuencia que antes, a pesar del dolor.</label>
+                                                            <div class="d-flex justify-content-start pseq-options">
+                                                                <div class="form-check form-check-inline">
+                                                                    <input class="form-check-input" type="radio" name="pseq_3" id="pseq_3_0" value="0"><label class="form-check-label" for="pseq_3_0">0</label>
+                                                                </div>
+                                                                <div class="form-check form-check-inline">
+                                                                    <input class="form-check-input" type="radio" name="pseq_3" id="pseq_3_1" value="1"><label class="form-check-label" for="pseq_3_1">1</label>
+                                                                </div>
+                                                                <div class="form-check form-check-inline">
+                                                                    <input class="form-check-input" type="radio" name="pseq_3" id="pseq_3_2" value="2"><label class="form-check-label" for="pseq_3_2">2</label>
+                                                                </div>
+                                                                <div class="form-check form-check-inline">
+                                                                    <input class="form-check-input" type="radio" name="pseq_3" id="pseq_3_3" value="3"><label class="form-check-label" for="pseq_3_3">3</label>
+                                                                </div>
+                                                                <div class="form-check form-check-inline">
+                                                                    <input class="form-check-input" type="radio" name="pseq_3" id="pseq_3_4" value="4"><label class="form-check-label" for="pseq_3_4">4</label>
+                                                                </div>
+                                                                <div class="form-check form-check-inline">
+                                                                    <input class="form-check-input" type="radio" name="pseq_3" id="pseq_3_5" value="5"><label class="form-check-label" for="pseq_3_5">5</label>
+                                                                </div>
+                                                                <div class="form-check form-check-inline">
+                                                                    <input class="form-check-input" type="radio" name="pseq_3" id="pseq_3_6" value="6"><label class="form-check-label" for="pseq_3_6">6</label>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <!-- Pregunta 4 -->
+                                                        <div class="mb-3 pseq-question">
+                                                            <label class="form-label">4. Puedo sobrellevar mi dolor en la mayoría de las situaciones.</label>
+                                                            <div class="d-flex justify-content-start pseq-options">
+                                                                <div class="form-check form-check-inline">
+                                                                    <input class="form-check-input" type="radio" name="pseq_4" id="pseq_4_0" value="0"><label class="form-check-label" for="pseq_4_0">0</label>
+                                                                </div>
+                                                                <div class="form-check form-check-inline">
+                                                                    <input class="form-check-input" type="radio" name="pseq_4" id="pseq_4_1" value="1"><label class="form-check-label" for="pseq_4_1">1</label>
+                                                                </div>
+                                                                <div class="form-check form-check-inline">
+                                                                    <input class="form-check-input" type="radio" name="pseq_4" id="pseq_4_2" value="2"><label class="form-check-label" for="pseq_4_2">2</label>
+                                                                </div>
+                                                                <div class="form-check form-check-inline">
+                                                                    <input class="form-check-input" type="radio" name="pseq_4" id="pseq_4_3" value="3"><label class="form-check-label" for="pseq_4_3">3</label>
+                                                                </div>
+                                                                <div class="form-check form-check-inline">
+                                                                    <input class="form-check-input" type="radio" name="pseq_4" id="pseq_4_4" value="4"><label class="form-check-label" for="pseq_4_4">4</label>
+                                                                </div>
+                                                                <div class="form-check form-check-inline">
+                                                                    <input class="form-check-input" type="radio" name="pseq_4" id="pseq_4_5" value="5"><label class="form-check-label" for="pseq_4_5">5</label>
+                                                                </div>
+                                                                <div class="form-check form-check-inline">
+                                                                    <input class="form-check-input" type="radio" name="pseq_4" id="pseq_4_6" value="6"><label class="form-check-label" for="pseq_4_6">6</label>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <!-- Pregunta 5 -->
+                                                        <div class="mb-3 pseq-question">
+                                                            <label class="form-label">5. Puedo realizar algún tipo de trabajo, a pesar del dolor. ("trabajo" incluye tareas domésticas, trabajo remunerado y no remunerado).</label>
+                                                            <div class="d-flex justify-content-start pseq-options">
+                                                                <div class="form-check form-check-inline">
+                                                                    <input class="form-check-input" type="radio" name="pseq_5" id="pseq_5_0" value="0"><label class="form-check-label" for="pseq_5_0">0</label>
+                                                                </div>
+                                                                <div class="form-check form-check-inline">
+                                                                    <input class="form-check-input" type="radio" name="pseq_5" id="pseq_5_1" value="1"><label class="form-check-label" for="pseq_5_1">1</label>
+                                                                </div>
+                                                                <div class="form-check form-check-inline">
+                                                                    <input class="form-check-input" type="radio" name="pseq_5" id="pseq_5_2" value="2"><label class="form-check-label" for="pseq_5_2">2</label>
+                                                                </div>
+                                                                <div class="form-check form-check-inline">
+                                                                    <input class="form-check-input" type="radio" name="pseq_5" id="pseq_5_3" value="3"><label class="form-check-label" for="pseq_5_3">3</label>
+                                                                </div>
+                                                                <div class="form-check form-check-inline">
+                                                                    <input class="form-check-input" type="radio" name="pseq_5" id="pseq_5_4" value="4"><label class="form-check-label" for="pseq_5_4">4</label>
+                                                                </div>
+                                                                <div class="form-check form-check-inline">
+                                                                    <input class="form-check-input" type="radio" name="pseq_5" id="pseq_5_5" value="5"><label class="form-check-label" for="pseq_5_5">5</label>
+                                                                </div>
+                                                                <div class="form-check form-check-inline">
+                                                                    <input class="form-check-input" type="radio" name="pseq_5" id="pseq_5_6" value="6"><label class="form-check-label" for="pseq_5_6">6</label>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <!-- Pregunta 6 -->
+                                                        <div class="mb-3 pseq-question">
+                                                            <label class="form-label">6. Puedo seguir haciendo muchas de las cosas que me gustan, como aficiones o actividades de ocio, a pesar del dolor.</label>
+                                                            <div class="d-flex justify-content-start pseq-options">
+                                                                <div class="form-check form-check-inline">
+                                                                    <input class="form-check-input" type="radio" name="pseq_6" id="pseq_6_0" value="0"><label class="form-check-label" for="pseq_6_0">0</label>
+                                                                </div>
+                                                                <div class="form-check form-check-inline">
+                                                                    <input class="form-check-input" type="radio" name="pseq_6" id="pseq_6_1" value="1"><label class="form-check-label" for="pseq_6_1">1</label>
+                                                                </div>
+                                                                <div class="form-check form-check-inline">
+                                                                    <input class="form-check-input" type="radio" name="pseq_6" id="pseq_6_2" value="2"><label class="form-check-label" for="pseq_6_2">2</label>
+                                                                </div>
+                                                                <div class="form-check form-check-inline">
+                                                                    <input class="form-check-input" type="radio" name="pseq_6" id="pseq_6_3" value="3"><label class="form-check-label" for="pseq_6_3">3</label>
+                                                                </div>
+                                                                <div class="form-check form-check-inline">
+                                                                    <input class="form-check-input" type="radio" name="pseq_6" id="pseq_6_4" value="4"><label class="form-check-label" for="pseq_6_4">4</label>
+                                                                </div>
+                                                                <div class="form-check form-check-inline">
+                                                                    <input class="form-check-input" type="radio" name="pseq_6" id="pseq_6_5" value="5"><label class="form-check-label" for="pseq_6_5">5</label>
+                                                                </div>
+                                                                <div class="form-check form-check-inline">
+                                                                    <input class="form-check-input" type="radio" name="pseq_6" id="pseq_6_6" value="6"><label class="form-check-label" for="pseq_6_6">6</label>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <!-- Pregunta 7 -->
+                                                        <div class="mb-3 pseq-question">
+                                                            <label class="form-label">7. Puedo sobrellevar mi dolor sin medicación.</label>
+                                                            <div class="d-flex justify-content-start pseq-options">
+                                                                <div class="form-check form-check-inline">
+                                                                    <input class="form-check-input" type="radio" name="pseq_7" id="pseq_7_0" value="0"><label class="form-check-label" for="pseq_7_0">0</label>
+                                                                </div>
+                                                                <div class="form-check form-check-inline">
+                                                                    <input class="form-check-input" type="radio" name="pseq_7" id="pseq_7_1" value="1"><label class="form-check-label" for="pseq_7_1">1</label>
+                                                                </div>
+                                                                <div class="form-check form-check-inline">
+                                                                    <input class="form-check-input" type="radio" name="pseq_7" id="pseq_7_2" value="2"><label class="form-check-label" for="pseq_7_2">2</label>
+                                                                </div>
+                                                                <div class="form-check form-check-inline">
+                                                                    <input class="form-check-input" type="radio" name="pseq_7" id="pseq_7_3" value="3"><label class="form-check-label" for="pseq_7_3">3</label>
+                                                                </div>
+                                                                <div class="form-check form-check-inline">
+                                                                    <input class="form-check-input" type="radio" name="pseq_7" id="pseq_7_4" value="4"><label class="form-check-label" for="pseq_7_4">4</label>
+                                                                </div>
+                                                                <div class="form-check form-check-inline">
+                                                                    <input class="form-check-input" type="radio" name="pseq_7" id="pseq_7_5" value="5"><label class="form-check-label" for="pseq_7_5">5</label>
+                                                                </div>
+                                                                <div class="form-check form-check-inline">
+                                                                    <input class="form-check-input" type="radio" name="pseq_7" id="pseq_7_6" value="6"><label class="form-check-label" for="pseq_7_6">6</label>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <!-- Pregunta 8 -->
+                                                        <div class="mb-3 pseq-question">
+                                                            <label class="form-label">8. A pesar del dolor, puedo cumplir la mayoría de mis objetivos en la vida.</label>
+                                                            <div class="d-flex justify-content-start pseq-options">
+                                                                <div class="form-check form-check-inline">
+                                                                    <input class="form-check-input" type="radio" name="pseq_8" id="pseq_8_0" value="0"><label class="form-check-label" for="pseq_8_0">0</label>
+                                                                </div>
+                                                                <div class="form-check form-check-inline">
+                                                                    <input class="form-check-input" type="radio" name="pseq_8" id="pseq_8_1" value="1"><label class="form-check-label" for="pseq_8_1">1</label>
+                                                                </div>
+                                                                <div class="form-check form-check-inline">
+                                                                    <input class="form-check-input" type="radio" name="pseq_8" id="pseq_8_2" value="2"><label class="form-check-label" for="pseq_8_2">2</label>
+                                                                </div>
+                                                                <div class="form-check form-check-inline">
+                                                                    <input class="form-check-input" type="radio" name="pseq_8" id="pseq_8_3" value="3"><label class="form-check-label" for="pseq_8_3">3</label>
+                                                                </div>
+                                                                <div class="form-check form-check-inline">
+                                                                    <input class="form-check-input" type="radio" name="pseq_8" id="pseq_8_4" value="4"><label class="form-check-label" for="pseq_8_4">4</label>
+                                                                </div>
+                                                                <div class="form-check form-check-inline">
+                                                                    <input class="form-check-input" type="radio" name="pseq_8" id="pseq_8_5" value="5"><label class="form-check-label" for="pseq_8_5">5</label>
+                                                                </div>
+                                                                <div class="form-check form-check-inline">
+                                                                    <input class="form-check-input" type="radio" name="pseq_8" id="pseq_8_6" value="6"><label class="form-check-label" for="pseq_8_6">6</label>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <!-- Pregunta 9 -->
+                                                        <div class="mb-3 pseq-question">
+                                                            <label class="form-label">9. Puedo llevar un estilo de vida normal, a pesar del dolor.</label>
+                                                            <div class="d-flex justify-content-start pseq-options">
+                                                                <div class="form-check form-check-inline">
+                                                                    <input class="form-check-input" type="radio" name="pseq_9" id="pseq_9_0" value="0"><label class="form-check-label" for="pseq_9_0">0</label>
+                                                                </div>
+                                                                <div class="form-check form-check-inline">
+                                                                    <input class="form-check-input" type="radio" name="pseq_9" id="pseq_9_1" value="1"><label class="form-check-label" for="pseq_9_1">1</label>
+                                                                </div>
+                                                                <div class="form-check form-check-inline">
+                                                                    <input class="form-check-input" type="radio" name="pseq_9" id="pseq_9_2" value="2"><label class="form-check-label" for="pseq_9_2">2</label>
+                                                                </div>
+                                                                <div class="form-check form-check-inline">
+                                                                    <input class="form-check-input" type="radio" name="pseq_9" id="pseq_9_3" value="3"><label class="form-check-label" for="pseq_9_3">3</label>
+                                                                </div>
+                                                                <div class="form-check form-check-inline">
+                                                                    <input class="form-check-input" type="radio" name="pseq_9" id="pseq_9_4" value="4"><label class="form-check-label" for="pseq_9_4">4</label>
+                                                                </div>
+                                                                <div class="form-check form-check-inline">
+                                                                    <input class="form-check-input" type="radio" name="pseq_9" id="pseq_9_5" value="5"><label class="form-check-label" for="pseq_9_5">5</label>
+                                                                </div>
+                                                                <div class="form-check form-check-inline">
+                                                                    <input class="form-check-input" type="radio" name="pseq_9" id="pseq_9_6" value="6"><label class="form-check-label" for="pseq_9_6">6</label>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <!-- Pregunta 10 -->
+                                                        <div class="mb-3 pseq-question">
+                                                            <label class="form-label">10. Poco a poco puedo ser más activo, a pesar del dolor.</label>
+                                                            <div class="d-flex justify-content-start pseq-options">
+                                                                <div class="form-check form-check-inline">
+                                                                    <input class="form-check-input" type="radio" name="pseq_10" id="pseq_10_0" value="0"><label class="form-check-label" for="pseq_10_0">0</label>
+                                                                </div>
+                                                                <div class="form-check form-check-inline">
+                                                                    <input class="form-check-input" type="radio" name="pseq_10" id="pseq_10_1" value="1"><label class="form-check-label" for="pseq_10_1">1</label>
+                                                                </div>
+                                                                <div class="form-check form-check-inline">
+                                                                    <input class="form-check-input" type="radio" name="pseq_10" id="pseq_10_2" value="2"><label class="form-check-label" for="pseq_10_2">2</label>
+                                                                </div>
+                                                                <div class="form-check form-check-inline">
+                                                                    <input class="form-check-input" type="radio" name="pseq_10" id="pseq_10_3" value="3"><label class="form-check-label" for="pseq_10_3">3</label>
+                                                                </div>
+                                                                <div class="form-check form-check-inline">
+                                                                    <input class="form-check-input" type="radio" name="pseq_10" id="pseq_10_4" value="4"><label class="form-check-label" for="pseq_10_4">4</label>
+                                                                </div>
+                                                                <div class="form-check form-check-inline">
+                                                                    <input class="form-check-input" type="radio" name="pseq_10" id="pseq_10_5" value="5"><label class="form-check-label" for="pseq_10_5">5</label>
+                                                                </div>
+                                                                <div class="form-check form-check-inline">
+                                                                    <input class="form-check-input" type="radio" name="pseq_10" id="pseq_10_6" value="6"><label class="form-check-label" for="pseq_10_6">6</label>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <!-- Total Score -->
+                                                        <div class="mt-4 d-flex align-items-center">
+                                                            <div>
+                                                                <label for="pseq_total" class="form-label mb-0"><strong>Puntaje Total:</strong></label>
+                                                                <input type="text" class="form-control" id="pseq_total" name="pseq_total" readonly style="width: 100px;">
+                                                            </div>
+                                                            <button type="button" id="pseq_reset_btn" class="btn btn-secondary ms-3">Reiniciar cuestionario</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="card mt-3">
+                                    <div class="card-body">
+                                        <h6 class="card-title">Signos vitales</h6>
+                                        <div class="row g-3">
+                                            <div class="col-md-2">
+                                                <label for="pa" class="form-label">PA:</label>
+                                                <input type="text" class="form-control" id="pa" name="pa">
+                                            </div>
+                                            <div class="col-md-2">
+                                                <label for="fc" class="form-label">FC:</label>
+                                                <input type="text" class="form-control" id="fc" name="fc">
+                                            </div>
+                                            <div class="col-md-2">
+                                                <label for="sao2" class="form-label">SaO2:</label>
+                                                <input type="text" class="form-control" id="sao2" name="sao2">
+                                            </div>
+                                            <div class="col-md-2">
+                                                <label for="d" class="form-label">Disnea:</label>
+                                                <input type="text" class="form-control" id="d" name="d">
+                                            </div>
+                                            <div class="col-md-4">
+                                                <label for="auscultacion" class="form-label">Auscultación:</label>
+                                                <input type="text" class="form-control" id="auscultacion" name="auscultacion">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="card mt-3">
+                                    <div class="card-body">
+                                        <h6 class="card-title">Exploración general</h6>
+                                        <div class="row g-3">
+                                            <div class="col-12">
+                                                <label for="inspeccion_descripcion" class="form-label">Inspección:</label>
+                                                <textarea class="form-control" id="inspeccion_descripcion" name="inspeccion_descripcion" rows="3"></textarea>
+                                            </div>
+                                            <div class="col-12">
+                                                <label for="inspeccion_archivo" class="form-label">Importar archivo (PNG o JPG):</label>
+                                                <input type="file" class="form-control" id="inspeccion_archivo" name="inspeccion_archivo" accept="image/png, image/jpeg">
+                                                <img src="" alt="Vista previa de la imagen de inspección" class="img-fluid mt-2 d-none" style="max-height: 200px;">
+                                            </div>
+                                            <div class="col-12">
+                                                <label for="palpacion" class="form-label">Palpación:</label>
+                                                <textarea class="form-control" id="palpacion" name="palpacion" rows="3"></textarea>
+                                            </div>
+                                            <div class="col-12">
+                                                <label for="evaluacion_funcional" class="form-label">Exploración funcional:</label>
+                                                <textarea class="form-control" id="evaluacion_funcional" name="evaluacion_funcional" rows="3"></textarea>
+                                                <div id="evaluacion-funcional-imagenes-container" class="mt-2">
+                                                    <!-- Image uploaders will be added here -->
+                                                </div>
+                                                <button type="button" id="add-evaluacion-funcional-imagen-btn" class="btn btn-success mt-2">Agregar Imagen</button>
+                                                <hr class="mt-4">
+                                                <div class="mt-2">
+                                                    <label class="form-label">Cuestionarios funcionales:</label>
+                                                    <div class="btn-group btn-group-sm" role="group" aria-label="Cuestionarios funcionales">
+                                                        <button type="button" id="open-ndi-btn" class="btn btn-outline-primary">Cervical (NDI)</button>
+                                                        <button type="button" id="open-owestry-btn" class="btn btn-outline-primary">Lumbar (Owestry)</button>
+                                                        <button type="button" id="open-quickdash-btn" class="btn btn-outline-primary">EESS (QuickDash)</button>
+                                                        <button type="button" id="open-lefs-btn" class="btn btn-outline-primary">EEII (LEFS)</button>
+                                                    </div>
+                                                </div>
+                                                <div class="mt-3" id="cuestionarios-pdf-container">
+                                                    <!-- PDFs de cuestionarios se agregarán aquí -->
+                                                </div>
+                                                <button type="button" id="add-cuestionario-pdf-btn" class="btn btn-success btn-sm mt-2">Agregar PDF</button>
+                                                <div class="mt-3">
+                                                    <label class="form-label" for="cuestionario_resultado">Resultado del cuestionario:</label>
+                                                    <textarea class="form-control" id="cuestionario_resultado" name="cuestionario_resultado" rows="2"></textarea>
+                                                </div>
+                                            </div>
+                                            <div class="col-12">
+                                                <label for="observaciones_adicionales" class="form-label">Observaciones adicionales:</label>
+                                                <textarea class="form-control" id="observaciones_adicionales" name="observaciones_adicionales" rows="3"></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane fade" id="exploracion-vestibular" role="tabpanel" aria-labelledby="exploracion-vestibular-tab">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Exploración vestibular</h5>
+                        <form class="row g-3">
+                            <div class="col-12">
+                                <label for="sintomas_asociados" class="form-label">Síntomas asociados:</label>
+                                <textarea class="form-control" id="sintomas_asociados" name="sintomas_asociados" rows="3"></textarea>
+                            </div>
+                            <div class="col-12">
+                                <label for="exploracion_equilibrio_estatico" class="form-label">Exploración equilibrio estático:</label>
+                                <textarea class="form-control" id="exploracion_equilibrio_estatico" name="exploracion_equilibrio_estatico" rows="3"></textarea>
+                            </div>
+                            <div class="col-12">
+                                <label for="exploracion_equilibrio_dinamico" class="form-label">Exploración equilibrio dinámico:</label>
+                                <textarea class="form-control" id="exploracion_equilibrio_dinamico" name="exploracion_equilibrio_dinamico" rows="3"></textarea>
+                            </div>
+                            <div class="col-12">
+                                <label for="exploracion_ocular_cervical" class="form-label">Exploración ocular y cervical:</label>
+                                <textarea class="form-control" id="exploracion_ocular_cervical" name="exploracion_ocular_cervical" rows="3"></textarea>
+                            </div>
+                            <div class="col-12">
+                                <label for="exploracion_canales_semicirculares" class="form-label">Exploración de canales semicirculares:</label>
+                                <table class="table table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th>Canal semicircular</th>
+                                            <th>Ng</th>
+                                            <th>Dirección</th>
+                                            <th>Duración</th>
+                                            <th>Acciones</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="canales-semicirculares-tbody">
+                                        <!-- Rows will be added dynamically here -->
+                                    </tbody>
+                                </table>
+                                <button type="button" id="add-canal-row-btn" class="btn btn-success mt-2">Agregar Fila</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane fade" id="imagenologia" role="tabpanel" aria-labelledby="imagenologia-tab">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Imagenología</h5>
+                        <div id="imagenes-container">
+                            <!-- Image Group 1 -->
+                            <div class="card imagen-card mb-3">
+                                <div class="card-body">
+                                    <div class="d-flex justify-content-between align-items-center mb-2">
+                                        <h6 class="card-title mb-0">Grupo de Imágenes 1</h6>
+                                        <button type="button" class="btn btn-danger btn-sm remove-imagen-btn">Quitar Grupo</button>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label">Descripción:</label>
+                                        <textarea class="form-control" name="imagen_descripcion[]" rows="2"></textarea>
+                                    </div>
+                                    <div class="image-files-container">
+                                        <!-- File inputs will be added here -->
+                                        <div class="mb-3 image-file-entry">
+                                            <label class="form-label">Importar archivo (PNG o JPG):</label>
+                                            <div class="input-group">
+                                                <input type="file" class="form-control" name="imagen_archivo_1[]" accept="image/png, image/jpeg">
+                                                <button class="btn btn-danger btn-sm remove-image-file-btn" type="button">Quitar</button>
+                                            </div>
+                                            <img src="" alt="Vista previa de la imagen" class="img-fluid mt-2 d-none" style="max-height: 200px;">
+                                        </div>
+                                    </div>
+                                    <button type="button" class="btn btn-primary btn-sm add-image-file-btn mt-2">Agregar Archivo</button>
+                                </div>
+                            </div>
+                        </div>
+                        <button type="button" id="add-imagen-btn" class="btn btn-success mt-2">Agregar Grupo de Imágenes</button>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane fade" id="tratamiento" role="tabpanel" aria-labelledby="tratamiento-tab">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Tratamiento</h5>
+                        <form>
+                            <div class="mb-3">
+                                <label for="diagnostico_kinesico" class="form-label">Diagnóstico kinésico y quiropráctico:</label>
+                                <textarea class="form-control" id="diagnostico_kinesico" name="diagnostico_kinesico" rows="3"></textarea>
+                            </div>
+                            <div class="mb-3">
+                                <label for="objetivo_general" class="form-label">Objetivo general:</label>
+                                <textarea class="form-control" id="objetivo_general" name="objetivo_general" rows="3"></textarea>
+                            </div>
+                            <div class="mb-3">
+                                <label for="objetivos_especificos" class="form-label">Objetivos específicos:</label>
+                                <textarea class="form-control" id="objetivos_especificos" name="objetivos_especificos" rows="3"></textarea>
+                            </div>
+                            <hr>
+                            <h5 class="mb-3">Intervenciones</h5>
+                            <div id="sesiones-container">
+                                <!-- Session 1 -->
+                <div class="card sesion-card mb-3">
+                                    <div class="card-body">
+                                        <div class="d-flex justify-content-between align-items-center mb-2">
+                                            <h6 class="card-title mb-0">Sesión 1</h6>
+                                            <button type="button" class="btn btn-danger btn-sm remove-session-btn">Quitar</button>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label class="form-label">Fecha:</label>
+                                            <input type="date" class="form-control" name="sesion_fecha[]">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label class="form-label">Evolución:</label>
+                                            <textarea class="form-control" name="sesion_evolucion[]" rows="2"></textarea>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label class="form-label">Tratamiento:</label>
+                                            <textarea class="form-control" name="sesion_tratamiento[]" rows="2"></textarea>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label class="form-label">Importar archivo (PNG o JPG):</label>
+                                            <input type="file" class="form-control" name="sesion_archivo[]" accept="image/png, image/jpeg">
+                                            <img src="" alt="Vista previa de la imagen" class="img-fluid mt-2 d-none" style="max-height: 200px;">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <button type="button" id="add-session-btn" class="btn btn-success mt-2">Agregar Sesión</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane fade" id="plantillas-ortopedicas" role="tabpanel" aria-labelledby="plantillas-ortopedicas-tab">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Plantillas ortopédicas</h5>
+                        <form class="row g-3">
+                            <div class="col-md-4">
+                                <label for="talla_calzado" class="form-label">Talla de calzado:</label>
+                                <input type="text" class="form-control" id="talla_calzado" name="talla_calzado" placeholder="Ej: 41">
+                            </div>
+                            <div class="col-12">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h6 class="card-title">Inspección visual</h6>
+                                        <div class="mb-3">
+                                            <label for="inspeccion_visual_descripcion" class="form-label">Descripción:</label>
+                                            <textarea class="form-control" id="inspeccion_visual_descripcion" name="inspeccion_visual_descripcion" rows="3"></textarea>
+                                        </div>
+                                        <div id="inspeccion-visual-imagenes-container" class="mt-2">
+                                            <!-- Se agregarán imágenes aquí -->
+                                        </div>
+                                        <button type="button" id="add-inspeccion-visual-imagen-btn" class="btn btn-success mt-2">Agregar Imagen</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="angulo_calcaneo" class="form-label">Ángulo calcáneo (°):</label>
+                                <input type="number" step="0.1" class="form-control" id="angulo_calcaneo" name="angulo_calcaneo" placeholder="Ej: 8.5">
+                            </div>
+                            <div class="col-12">
+                                <label for="prueba_funcional_inicial" class="form-label">Prueba funcional inicial:</label>
+                                <textarea class="form-control" id="prueba_funcional_inicial" name="prueba_funcional_inicial" rows="3"></textarea>
+                            </div>
+                            <div class="col-12">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h6 class="card-title">Prueba funcional con bloque negativo</h6>
+                                        <h7 class="card-title">Pie derecho</h7>
+                                        <div class="row g-3">
+                                            <div class="col-md-4">
+                                                <label for="prueba_bloque_negativo_altura" class="form-label">Altura de bloque (mm):</label>
+                                                <input type="number" step="1" class="form-control" id="prueba_bloque_negativo_altura" name="prueba_bloque_negativo_altura" placeholder="Ej: 6">
+                                            </div>
+                                            <div class="col-md-8">
+                                                <label for="prueba_bloque_negativo_cambio" class="form-label">Cambio funcional:</label>
+                                                <textarea class="form-control" id="prueba_bloque_negativo_cambio" name="prueba_bloque_negativo_cambio" rows="3"></textarea>
+                                            </div>
+                                        </div>
+                                        <h7 class="card-title">Pie izquierdo</h7>
+                                        <div class="row g-3">
+                                            <div class="col-md-4">
+                                                <label for="prueba_bloque_negativo_altura" class="form-label">Altura de bloque (mm):</label>
+                                                <input type="number" step="1" class="form-control" id="prueba_bloque_negativo_altura" name="prueba_bloque_negativo_altura" placeholder="Ej: 6">
+                                            </div>
+                                            <div class="col-md-8">
+                                                <label for="prueba_bloque_negativo_cambio" class="form-label">Cambio funcional:</label>
+                                                <textarea class="form-control" id="prueba_bloque_negativo_cambio" name="prueba_bloque_negativo_cambio" rows="3"></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h6 class="card-title">Huella plantar</h6>
+                                        <div id="huella-plantar-imagenes-container" class="mt-2">
+                                            <!-- Se agregarán imágenes aquí -->
+                                        </div>
+                                        <button type="button" id="add-huella-plantar-imagen-btn" class="btn btn-success mt-2">Agregar Imagen</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <label for="consideraciones_especiales" class="form-label">Consideraciones especiales:</label>
+                                <textarea class="form-control" id="consideraciones_especiales" name="consideraciones_especiales" rows="3"></textarea>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+    </div>
+
+    <!-- Modal Mapa Corporal de Dolor -->
+    <div class="modal fade" id="mapaDolorModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-xl modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Mapa corporal del dolor</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body p-0" style="height: 80vh;">
+                    <iframe src="Mapa%20dolor/mapa_dolor.html" title="Mapa corporal del dolor" style="width:100%; height:100%; border:0;"></iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Cuestionarios funcionales -->
+    <div class="modal fade" id="cuestionarioModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-xl modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Cuestionario funcional</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body p-0" style="height: 80vh;">
+                    <iframe id="cuestionarioIframe" src="" title="Cuestionario funcional" style="width:100%; height:100%; border:0;"></iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <script src="script.js"></script>
+</body>
+</html>

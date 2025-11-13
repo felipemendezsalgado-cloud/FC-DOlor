@@ -1,0 +1,241 @@
+:root {
+    --primary-green: #4CAF50; /* A vibrant, grassy green */
+    --light-green: #E8F5E9;   /* A very light green, for backgrounds */
+    --dark-green: #388E3C;    /* A darker green for accents and hover states */
+    --white: #FFFFFF;
+    --text-color: #333;
+}
+
+#dolor-seleccionado {
+    font-weight: bold;
+}
+
+.slider-container {
+    padding: 0 20px; /* Add some padding to prevent labels from touching the edges */
+}
+
+#dolor-slider {
+    background: linear-gradient(to right, green, yellow, red);
+    margin-top: 5px; /* Add some space between the label and the slider */
+}
+
+.slider-labels {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.9em;
+    color: #6c757d; /* Bootstrap's secondary text color */
+}
+
+/* Wrapper para que el slider y las caras compartan el mismo ancho */
+.eva-wrapper {
+    display: block;
+    width: 80%; /* reduce ancho en 20% */
+    margin: 0 auto; /* mantener centrado */
+}
+
+.eva-wrapper .slider-container,
+.eva-wrapper #dolor-slider {
+    width: 100%;
+}
+
+.caras-dolor {
+    width: 100%;
+    height: auto;
+}
+
+/* For WebKit browsers (Chrome, Safari) */
+input[type=range].form-range::-webkit-slider-runnable-track {
+    background: linear-gradient(to right, green, yellow, red);
+    height: 10px;
+    border-radius: 5px;
+}
+
+/* For Mozilla Firefox */
+input[type=range].form-range::-moz-range-track {
+    background: linear-gradient(to right, green, yellow, red);
+    height: 10px;
+    border-radius: 5px;
+}
+
+/* For Microsoft Edge */
+input[type=range].form-range::-ms-track {
+    background: linear-gradient(to right, green, yellow, red);
+    height: 10px;
+    border-radius: 5px;
+    border: none;
+    color: transparent;
+}
+
+.sidebar img {
+    max-height: 180px; /* aumenta tamaño del logo en 20% */
+    max-width: 100%;
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    margin-bottom: 1rem;
+}
+
+/* Ícono de usuario del mismo tamaño que el logo */
+.user-icon {
+    font-size: 150px;
+    line-height: 1;
+}
+
+body {
+    background-color: var(--light-green);
+    color: var(--text-color);
+}
+
+.sidebar {
+    background-color: var(--white);
+    border-right: 1px solid var(--primary-green);
+    padding: 20px;
+    position: sticky;
+    top: 20px; /* mantiene visible la columna al hacer scroll */
+    max-height: calc(100vh - 40px);
+    overflow-y: auto; /* permite movimiento dentro del menú lateral */
+}
+
+#banner-container {
+    background-color: var(--white);
+    border: 1px solid var(--primary-green);
+    padding: 20px;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    height: 150px; /* Mantener tamaño del banner */
+    width: 100%;
+}
+
+.banner-left {
+    flex: 0 0 50%; /* 50% izquierda */
+    display: flex;
+    align-items: center;
+    gap: 0; /* sin espacio entre texto e imagen */
+}
+
+.banner-right {
+    flex: 0 0 50%; /* 50% derecha */
+    display: flex;
+    flex-direction: column;
+}
+
+.banner-right-top {
+    flex: 0.8;
+    text-align: right;
+}
+
+.banner-right-bottom {
+    flex: 0.2;
+    background-color: #085e08; /* verde solicitado */
+    color: var(--white);
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding: 5px 10px;
+    font-weight: bold;
+}
+
+.banner-right-bottom .phone-icon {
+    margin: 0 8px;
+}
+
+.banner-right-bottom p {
+    margin: 0;
+}
+
+.banner-title {
+    color: #2f4c16; /* título izquierdo en verde oscuro */
+    font-weight: bold;
+    text-align: left;
+    margin: 0; /* eliminar espacio por defecto del h1 */
+}
+
+.banner-right-title {
+    color: #2f4c16; /* título principal del banner derecho */
+    font-weight: bold;
+    font-size: 1.5rem; /* Adjust size as needed */
+}
+
+.banner-right-subtitle {
+    color: var(--primary-green);
+    font-weight: bold;
+    font-size: 1rem; /* Adjust size as needed */
+}
+
+.banner-left-spine {
+    max-height: 120px; /* ajustar tamaño dentro del banner */
+    width: auto;
+    object-fit: contain;
+    display: block;
+    margin-left: 4px; /* separación mínima respecto al texto */
+}
+
+.nav-tabs .nav-link {
+    border: 1px solid transparent;
+    border-top-left-radius: .25rem;
+    border-top-right-radius: .25rem;
+    color: var(--primary-green);
+    font-weight: bold;
+}
+
+.nav-tabs .nav-link.active, .nav-tabs .nav-item.show .nav-link {
+    color: var(--dark-green);
+    background-color: var(--white);
+    border-color: var(--primary-green) var(--primary-green) var(--white);
+}
+
+.nav-tabs .nav-link:hover {
+    border-color: var(--light-green) var(--light-green) var(--primary-green);
+}
+
+.btn-primary {
+    background-color: var(--primary-green);
+    border-color: var(--primary-green);
+}
+
+.btn-primary:hover {
+    background-color: var(--dark-green);
+    border-color: var(--dark-green);
+}
+
+#importar-json-btn {
+    color: var(--white);
+}
+
+/* PSEQ Questionnaire Styles */
+.pseq-question {
+    margin-bottom: 1rem;
+}
+
+.pseq-options {
+    gap: 0.75rem; /* Space out the radio buttons */
+}
+
+.pseq-options .form-check-label {
+    padding-left: 0.25rem;
+}
+
+.pseq-options .form-check-inline {
+    margin-right: 0.5rem; /* Adjust spacing between options */
+}
+
+.btn-success {
+    background-color: var(--primary-green);
+    border-color: var(--primary-green);
+}
+
+.btn-success:hover {
+    background-color: var(--dark-green);
+    border-color: var(--dark-green);
+}
+
+.btn-info {
+    background-color: var(--primary-green);
+    border-color: var(--primary-green);
+}
+
+.btn-info:hover {
+    background-color: var(--dark-green);
+    border-color: var(--dark-green);
+}

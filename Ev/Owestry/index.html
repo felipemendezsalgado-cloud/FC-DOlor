@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Escala de Incapacidad por dolor lumbar de Oswestry</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
+</head>
+<body>
+    <div class="container" id="quiz-container">
+        <h1>Escala de Incapacidad por dolor lumbar de Oswestry</h1>
+        <form id="quizForm">
+            <div class="question">
+                <p>1) Intensidad del dolor:</p>
+                <label><input type="radio" name="q1" value="0"> Puedo soportar el dolor sin necesidad de tomar calmantes.</label>
+                <label><input type="radio" name="q1" value="1"> El dolor es fuerte pero me arreglo sin tomar calmantes.</label>
+                <label><input type="radio" name="q1" value="2"> Los calmantes me alivian completamente el dolor.</label>
+                <label><input type="radio" name="q1" value="3"> Los calmantes me alivian un poco el dolor.</label>
+                <label><input type="radio" name="q1" value="4"> Los calmantes apenas me alivian el dolor.</label>
+                <label><input type="radio" name="q1" value="5"> Los calmantes no me alivian el dolor y no los tomo.</label>
+            </div>
+            <div class="question">
+                <p>2) Estar de pie:</p>
+                <label><input type="radio" name="q2" value="0"> Puedo estar de pie tanto tiempo como quiera sin que me aumente el dolor.</label>
+                <label><input type="radio" name="q2" value="1"> Puedo estar de pie tanto tiempo como quiera pero me aumenta el dolor.</label>
+                <label><input type="radio" name="q2" value="2"> El dolor me impide estar de pie más de una hora.</label>
+                <label><input type="radio" name="q2" value="3"> El dolor me impide estar de pie más de media hora.</label>
+                <label><input type="radio" name="q2" value="4"> El dolor me impide estar de pie más de 10 minutos.</label>
+                <label><input type="radio" name="q2" value="5"> El dolor me impide estar de pie.</label>
+            </div>
+            <div class="question">
+                <p>3) Cuidados personales:</p>
+                <label><input type="radio" name="q3" value="0"> Me las puedo arreglar solo sin que me aumente el dolor.</label>
+                <label><input type="radio" name="q3" value="1"> Me las puedo arreglar solo pero esto me aumenta el dolor.</label>
+                <label><input type="radio" name="q3" value="2"> Lavarme, vestirme, etc, me produce dolor y tengo que hacerlo despacio y con cuidado.</label>
+                <label><input type="radio" name="q3" value="3"> Necesito alguna ayuda pero consigo hacer la mayoría de las cosas yo solo.</label>
+                <label><input type="radio" name="q3" value="4"> Necesito ayuda para hacer la mayoría de las cosas.</label>
+                <label><input type="radio" name="q3" value="5"> No puedo vestirme, me cuesta lavarme y suelo quedarme en la cama.</label>
+            </div>
+            <div class="question">
+                <p>4) Dormir:</p>
+                <label><input type="radio" name="q4" value="0"> El dolor no me impide dormir bien.</label>
+                <label><input type="radio" name="q4" value="1"> Sólo puedo dormir si tomo pastillas.</label>
+                <label><input type="radio" name="q4" value="2"> Incluso tomando pastillas duermo menos de 6 horas.</label>
+                <label><input type="radio" name="q4" value="3"> Incluso tomando pastillas duermo menos de 4 horas.</label>
+                <label><input type="radio" name="q4" value="4"> Incluso tomando pastillas duermo menos de 2 horas.</label>
+                <label><input type="radio" name="q4" value="5"> El dolor me impide totalmente dormir.</label>
+            </div>
+            <div class="question">
+                <p>5) Levantar peso:</p>
+                <label><input type="radio" name="q5" value="0"> Puedo levantar objetos pesados sin que me aumente el dolor.</label>
+                <label><input type="radio" name="q5" value="1"> Puedo levantar objetos pesados pero me aumenta el dolor.</label>
+                <label><input type="radio" name="q5" value="2"> El dolor me impide levantar objetos pesados del suelo, pero puedo hacerlo si están en un sitio cómodo (ej. en una mesa).</label>
+                <label><input type="radio" name="q5" value="3"> El dolor me impide levantar objetos pesados, pero sí puedo levantar objetos ligeros o medianos si están en un sitio cómodo.</label>
+                <label><input type="radio" name="q5" value="4"> Sólo puedo levantar objetos muy ligeros.</label>
+                <label><input type="radio" name="q5" value="5"> No puedo levantar ni elevar ningún objeto.</label>
+            </div>
+            <div class="question">
+                <p>6) Andar:</p>
+                <label><input type="radio" name="q6" value="0"> El dolor no me impide andar.</label>
+                <label><input type="radio" name="q6" value="1"> El dolor me impide andar más de un kilómetro.</label>
+                <label><input type="radio" name="q6" value="2"> El dolor me impide andar más de 500 metros.</label>
+                <label><input type="radio" name="q6" value="3"> El dolor me impide andar más de 250 metros.</label>
+                <label><input type="radio" name="q6" value="4"> Sólo puedo andar con bastón o muletas.</label>
+                <label><input type="radio" name="q6" value="5"> Permanezco en la cama casi todo el tiempo y tengo que ir a rastras al baño.</label>
+            </div>
+            <div class="question">
+                <p>7) Vida social:</p>
+                <label><input type="radio" name="q7" value="0"> Mi vida social es normal y no me aumenta el dolor.</label>
+                <label><input type="radio" name="q7" value="1"> Mi vida social es normal pero me aumenta el dolor.</label>
+                <label><input type="radio" name="q7" value="2"> El dolor no tiene no tiene un efecto importante en mi vida social, pero si impide mis actividades más enérgicas como bailar, etc..</label>
+                <label><input type="radio" name="q7" value="3"> El dolor ha limitado mi vida social y no salgo tan a menudo.</label>
+                <label><input type="radio" name="q7" value="4"> El dolor ha limitado mi vida social al hogar.</label>
+                <label><input type="radio" name="q7" value="5"> No tengo vida social a causa del dolor.</label>
+            </div>
+            <div class="question">
+                <p>8) Estar sentado:</p>
+                <label><input type="radio" name="q8" value="0"> Puedo estar sentado en cualquier tipo de silla todo el tiempo que quiera.</label>
+                <label><input type="radio" name="q8" value="1"> Puedo estar sentado en mi silla favorita todo el tiempo que quiera.</label>
+                <label><input type="radio" name="q8" value="2"> El dolor me impide estar sentado más de una hora.</label>
+                <label><input type="radio" name="q8" value="3"> El dolor me impide estar sentado más de media hora.</label>
+                <label><input type="radio" name="q8" value="4"> El dolor me impide estar sentado más de 10 minutos.</label>
+                <label><input type="radio" name="q8" value="5"> El dolor me impide estar sentado.</label>
+            </div>
+            <div class="question">
+                <p>9) Viajar:</p>
+                <label><input type="radio" name="q9" value="0"> Puedo viajar a cualquier sitio sin que me aumente el dolor.</label>
+                <label><input type="radio" name="q9" value="1"> Puedo viajar a cualquier sitio, pero me aumenta el dolor.</label>
+                <label><input type="radio" name="q9" value="2"> El dolor es fuerte pero aguanto viajes de más de 2 horas.</label>
+                <label><input type="radio" name="q9" value="3"> El dolor me limita a viajes de menos de una hora.</label>
+                <label><input type="radio" name="q9" value="4"> El dolor me limita a viajes cortos y necesarios de menos de media hora.</label>
+                <label><input type="radio" name="q9" value="5"> El dolor me impide viajar excepto para ir al médico o al hospital.</label>
+            </div>
+            <button type="button" onclick="calculateResult()">Calcular resultado</button>
+            <button type="button" id="export-button" onclick="exportToPdf()">Exportar como PDF</button>
+        </form>
+        <div id="result"></div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

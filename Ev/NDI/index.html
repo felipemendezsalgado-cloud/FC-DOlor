@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Índice de discapacidad de cuello (NDI)</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Índice de discapacidad de cuello (NDI)</h1>
+        <form id="ndi-form">
+            <div class="question">
+                <p>1) Intensidad del dolor:</p>
+                <label><input type="radio" name="q1" value="0"> No tengo dolor en este momento.</label>
+                <label><input type="radio" name="q1" value="1"> El dolor es muy leve por el momento.</label>
+                <label><input type="radio" name="q1" value="2"> El dolor es moderado por el momento.</label>
+                <label><input type="radio" name="q1" value="3"> El dolor es bastante severo en este momento.</label>
+                <label><input type="radio" name="q1" value="4"> El dolor es muy fuerte en este momento.</label>
+                <label><input type="radio" name="q1" value="5"> El dolor es el peor dolor imaginable en este momento.</label>
+            </div>
+            <div class="question">
+                <p>2) Cuidados personales (por ejemplo, lavarse, vestirse, etc.):</p>
+                <label><input type="radio" name="q2" value="0"> Puedo cuidarme con normalidad sin causarme dolor adicional.</label>
+                <label><input type="radio" name="q2" value="1"> Puedo cuidar de mí mismo, pero causa dolor extra.</label>
+                <label><input type="radio" name="q2" value="2"> Es doloroso cuidarme y soy lento y cuidadoso.</label>
+                <label><input type="radio" name="q2" value="3"> Necesito ayuda, pero me ocupo de la mayor parte de mi cuidado personal.</label>
+                <label><input type="radio" name="q2" value="4"> Necesito ayuda a diario en la mayoría de los aspectos del cuidado personal.</label>
+                <label><input type="radio" name="q2" value="5"> No me visto; me lavo con dificultad y permanezco en cama.</label>
+            </div>
+            <div class="question">
+                <p>3) Elevación:</p>
+                <label><input type="radio" name="q3" value="0"> Puedo levantar pesos pesados sin dolor adicional.</label>
+                <label><input type="radio" name="q3" value="1"> Puedo levantar pesos pesados, pero me da dolor extra.</label>
+                <label><input type="radio" name="q3" value="2"> El dolor me impide levantar pesos pesados del suelo, pero puedo hacerlo si están bien colocados (por ejemplo, sobre una mesa).</label>
+                <label><input type="radio" name="q3" value="3"> El dolor me impide levantar pesos pesados, pero puedo manejar pesos ligeros o medios si están bien colocados.</label>
+                <label><input type="radio" name="q3" value="4"> Puedo levantar pesos muy ligeros.</label>
+                <label><input type="radio" name="q3" value="5"> No puedo levantar ni cargar nada.</label>
+            </div>
+            <div class="question">
+                <p>4) Lectura:</p>
+                <label><input type="radio" name="q4" value="0"> Puedo leer todo lo que quiera sin dolor de cuello.</label>
+                <label><input type="radio" name="q4" value="1"> Puedo leer todo lo que quiera con un ligero dolor de cuello.</label>
+                <label><input type="radio" name="q4" value="2"> Puedo leer todo lo que quiera con un dolor de cuello moderado.</label>
+                <label><input type="radio" name="q4" value="3"> No puedo leer tanto como quisiera debido a un dolor moderado en el cuello.</label>
+                <label><input type="radio" name="q4" value="4"> No puedo leer tanto como quisiera debido a un fuerte dolor de cuello.</label>
+                <label><input type="radio" name="q4" value="5"> No sé leer en absoluto.</label>
+            </div>
+            <div class="question">
+                <p>5) Dolores de cabeza:</p>
+                <label><input type="radio" name="q5" value="0"> No tengo ningún dolor de cabeza.</label>
+                <label><input type="radio" name="q5" value="1"> Tengo ligeros dolores de cabeza que aparecen con poca frecuencia.</label>
+                <label><input type="radio" name="q5" value="2"> Tengo dolores de cabeza moderados que aparecen con poca frecuencia.</label>
+                <label><input type="radio" name="q5" value="3"> Tengo dolores de cabeza moderados que aparecen con frecuencia.</label>
+                <label><input type="radio" name="q5" value="4"> Tengo fuertes dolores de cabeza que aparecen con frecuencia.</label>
+                <label><input type="radio" name="q5" value="5"> Tengo dolores de cabeza casi todo el tiempo.</label>
+            </div>
+            <div class="question">
+                <p>6) Concentración:</p>
+                <label><input type="radio" name="q6" value="0"> Puedo concentrarme plenamente cuando quiero sin ninguna dificultad.</label>
+                <label><input type="radio" name="q6" value="1"> Puedo concentrarme plenamente cuando quiero con una ligera dificultad.</label>
+                <label><input type="radio" name="q6" value="2"> Tengo bastantes dificultades para concentrarme cuando quiero.</label>
+                <label><input type="radio" name="q6" value="3"> Tengo muchas dificultades para concentrarme cuando quiero.</label>
+                <label><input type="radio" name="q6" value="4"> Tengo muchas dificultades para concentrarme cuando quiero.</label>
+                <label><input type="radio" name="q6" value="5"> No puedo concentrarme en absoluto.</label>
+            </div>
+            <div class="question">
+                <p>7) Trabajo:</p>
+                <label><input type="radio" name="q7" value="0"> Puedo trabajar todo lo que quiera.</label>
+                <label><input type="radio" name="q7" value="1"> Sólo puedo hacer mi trabajo habitual, pero no más.</label>
+                <label><input type="radio" name="q7" value="2"> Puedo hacer la mayor parte de mi trabajo habitual, pero no más.</label>
+                <label><input type="radio" name="q7" value="3"> No puedo hacer mi trabajo habitual.</label>
+                <label><input type="radio" name="q7" value="4"> Apenas puedo trabajar.</label>
+                <label><input type="radio" name="q7" value="5"> No puedo hacer ningún trabajo.</label>
+            </div>
+            <div class="question">
+                <p>8) Conducción:</p>
+                <label><input type="radio" name="q8" value="0"> Puedo conducir mi coche sin dolor de cuello.</label>
+                <label><input type="radio" name="q8" value="1"> Puedo conducir mi coche todo el tiempo que quiera con un ligero dolor de cuello.</label>
+                <label><input type="radio" name="q8" value="2"> Puedo conducir mi coche todo el tiempo que quiera con un dolor de cuello moderado.</label>
+                <label><input type="radio" name="q8" value="3"> No puedo conducir mi coche todo el tiempo que quisiera debido a un dolor cervical moderado.</label>
+                <label><input type="radio" name="q8" value="4"> Apenas puedo conducir debido a un fuerte dolor de cuello.</label>
+                <label><input type="radio" name="q8" value="5"> No puedo conducir mi coche en absoluto.</label>
+            </div>
+            <div class="question">
+                <p>9) Dormir:</p>
+                <label><input type="radio" name="q9" value="0"> No tengo problemas para dormir.</label>
+                <label><input type="radio" name="q9" value="1"> Mi sueño está ligeramente alterado (menos de 1 hora sin dormir).</label>
+                <label><input type="radio"name="q9" value="2"> Mi sueño está ligeramente alterado (de 1 a 2 horas sin dormir).</label>
+                <label><input type="radio" name="q9" value="3"> Mi sueño está moderadamente alterado (de 2 a 3 horas sin dormir).</label>
+                <label><input type="radio" name="q9" value="4"> Mi sueño está muy alterado (de 3 a 5 horas sin dormir).</label>
+                <label><input type="radio" name="q9" value="5"> Mi sueño está completamente alterado (de 5 a 7 horas sin dormir).</label>
+            </div>
+            <div class="question">
+                <p>10) Ocio:</p>
+                <label><input type="radio" name="q10" value="0"> Puedo realizar todas mis actividades recreativas sin dolor de cuello.</label>
+                <label><input type="radio" name="q10" value="1"> Puedo realizar todas mis actividades recreativas con algo de dolor de cuello.</label>
+                <label><input type="radio" name="q10" value="2"> Puedo realizar la mayoría de mis actividades recreativas habituales, pero no todas, debido al dolor de cuello.</label>
+                <label><input type="radio" name="q10" value="3"> No puedo realizar algunas de mis actividades recreativas habituales debido al dolor de cuello.</label>
+                <label><input type="radio" name="q10" value="4"> Apenas puedo realizar actividades recreativas debido al dolor de cuello.</label>
+                <label><input type="radio" name="q10" value="5"> No puedo realizar ninguna actividad recreativa debido al dolor de cuello.</label>
+            </div>
+            <div class="buttons">
+                <button type="button" id="calculate-btn">Calcular resultado</button>
+                <button type="button" id="export-btn">Exportar como pdf</button>
+            </div>
+        </form>
+        <div id="result"></div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

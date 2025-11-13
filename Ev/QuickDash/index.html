@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cuestionario de Funcionalidad</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            margin: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        th, td {
+            border: 1px solid #ccc;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        .question-column {
+            width: 40%;
+        }
+        .options-column {
+            text-align: center;
+            width: 12%;
+        }
+        .result-container {
+            margin-top: 20px;
+            font-weight: bold;
+        }
+        .export-buttons {
+            margin-top: 20px;
+        }
+        button {
+            padding: 10px 15px;
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Cuestionario de Funcionalidad del Miembro Superior</h1>
+
+    <form id="disabilityForm">
+        <!-- Tabla 1: Preguntas 1-6 -->
+        <table>
+            <thead>
+                <tr>
+                    <th class="question-column">Pregunta</th>
+                    <th class="options-column">1<br>Ninguna dificultad</th>
+                    <th class="options-column">2<br>Poca dificultad</th>
+                    <th class="options-column">3<br>Dificultad moderada</th>
+                    <th class="options-column">4<br>Mucha dificultad</th>
+                    <th class="options-column">5<br>Incapaz</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Pregunta 1 -->
+                <tr>
+                    <td>1) Abrir un pote que tenga la tapa apretada, dándole vueltas</td>
+                    <td class="options-column"><input type="radio" name="q1" value="1"></td>
+                    <td class="options-column"><input type="radio" name="q1" value="2"></td>
+                    <td class="options-column"><input type="radio" name="q1" value="3"></td>
+                    <td class="options-column"><input type="radio" name="q1" value="4"></td>
+                    <td class="options-column"><input type="radio" name="q1" value="5"></td>
+                </tr>
+                <!-- Pregunta 2 -->
+                <tr>
+                    <td>2) Realizar los quehaceres del hogar más fuertes (por ejemplo, lavar ventanas, mapear)</td>
+                    <td class="options-column"><input type="radio" name="q2" value="1"></td>
+                    <td class="options-column"><input type="radio" name="q2" value="2"></td>
+                    <td class="options-column"><input type="radio" name="q2" value="3"></td>
+                    <td class="options-column"><input type="radio" name="q2" value="4"></td>
+                    <td class="options-column"><input type="radio" name="q2" value="5"></td>
+                </tr>
+                <!-- Pregunta 3 -->
+                <tr>
+                    <td>3) Cargar una bolsa de compra o un maletín</td>
+                    <td class="options-column"><input type="radio" name="q3" value="1"></td>
+                    <td class="options-column"><input type="radio" name="q3" value="2"></td>
+                    <td class="options-column"><input type="radio" name="q3" value="3"></td>
+                    <td class="options-column"><input type="radio" name="q3" value="4"></td>
+                    <td class="options-column"><input type="radio" name="q3" value="5"></td>
+                </tr>
+                <!-- Pregunta 4 -->
+                <tr>
+                    <td>4) Lavarse la espalda</td>
+                    <td class="options-column"><input type="radio" name="q4" value="1"></td>
+                    <td class="options-column"><input type="radio" name="q4" value="2"></td>
+                    <td class="options-column"><input type="radio" name="q4" value="3"></td>
+                    <td class="options-column"><input type="radio" name="q4" value="4"></td>
+                    <td class="options-column"><input type="radio" name="q4" value="5"></td>
+                </tr>
+                <!-- Pregunta 5 -->
+                <tr>
+                    <td>5) Usar un cuchillo para cortar alimentos</td>
+                    <td class="options-column"><input type="radio" name="q5" value="1"></td>
+                    <td class="options-column"><input type="radio" name="q5" value="2"></td>
+                    <td class="options-column"><input type="radio" name="q5" value="3"></td>
+                    <td class="options-column"><input type="radio" name="q5" value="4"></td>
+                    <td class="options-column"><input type="radio" name="q5" value="5"></td>
+                </tr>
+                <!-- Pregunta 6 -->
+                <tr>
+                    <td>6) Realizar actividades recreativas en las que se recibe impacto en el brazo, hombro o mano (por ejemplo, batear, jugar al golf, al tenis, etc.)</td>
+                    <td class="options-column"><input type="radio" name="q6" value="1"></td>
+                    <td class="options-column"><input type="radio" name="q6" value="2"></td>
+                    <td class="options-column"><input type="radio" name="q6" value="3"></td>
+                    <td class="options-column"><input type="radio" name="q6" value="4"></td>
+                    <td class="options-column"><input type="radio" name="q6" value="5"></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <!-- Tabla 2: Preguntas 7-8 -->
+        <table>
+            <thead>
+                <tr>
+                    <th class="question-column">Pregunta</th>
+                    <th class="options-column">1<br>En lo absoluto</th>
+                    <th class="options-column">2<br>Poco</th>
+                    <th class="options-column">3<br>Moderadamente</th>
+                    <th class="options-column">4<br>Bastante</th>
+                    <th class="options-column">5<br>Muchísimo</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Pregunta 7 -->
+                <tr>
+                    <td>7) ¿Hasta qué punto el problema del brazo, hombro o mano dificultó las actividades sociales con familiares, amigos, vecinos o grupos durante la semana pasada?</td>
+                    <td class="options-column"><input type="radio" name="q7" value="1"></td>
+                    <td class="options-column"><input type="radio" name="q7" value="2"></td>
+                    <td class="options-column"><input type="radio" name="q7" value="3"></td>
+                    <td class="options-column"><input type="radio" name="q7" value="4"></td>
+                    <td class="options-column"><input type="radio" name="q7" value="5"></td>
+                </tr>
+                <!-- Pregunta 8 -->
+                <tr>
+                    <td>8) ¿Tuvo que limitar su trabajo u otras actividades diarias a causa del problema del brazo, hombro o mano durante la semana pasada?</td>
+                    <td class="options-column"><input type="radio" name="q8" value="1"></td>
+                    <td class="options-column"><input type="radio" name="q8" value="2"></td>
+                    <td class="options-column"><input type="radio" name="q8" value="3"></td>
+                    <td class="options-column"><input type="radio" name="q8" value="4"></td>
+                    <td class="options-column"><input type="radio" name="q8" value="5"></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <!-- Tabla 3: Preguntas 9-10 -->
+        <table>
+            <thead>
+                <tr>
+                    <th class="question-column">Pregunta</th>
+                    <th class="options-column">1<br>Ninguna</th>
+                    <th class="options-column">2<br>Poca</th>
+                    <th class="options-column">3<br>Moderada</th>
+                    <th class="options-column">4<br>Mucha</th>
+                    <th class="options-column">5<br>Muchísima</th>
+                </tr>
+            </thead>
+            <tbody>
+                 <!-- Pregunta 9 -->
+                 <tr>
+                    <td>9) Dolor de brazo, hombro o mano.</td>
+                    <td class="options-column"><input type="radio" name="q9" value="1"></td>
+                    <td class="options-column"><input type="radio" name="q9" value="2"></td>
+                    <td class="options-column"><input type="radio" name="q9" value="3"></td>
+                    <td class="options-column"><input type="radio" name="q9" value="4"></td>
+                    <td class="options-column"><input type="radio" name="q9" value="5"></td>
+                </tr>
+                <!-- Pregunta 10 -->
+                <tr>
+                    <td>10) Hormigueo en el brazo, hombro o mano.</td>
+                    <td class="options-column"><input type="radio" name="q10" value="1"></td>
+                    <td class="options-column"><input type="radio" name="q10" value="2"></td>
+                    <td class="options-column"><input type="radio" name="q10" value="3"></td>
+                    <td class="options-column"><input type="radio" name="q10" value="4"></td>
+                    <td class="options-column"><input type="radio" name="q10" value="5"></td>
+                </tr>
+            </tbody>
+        </table>
+
+         <!-- Tabla 4: Pregunta 11 -->
+         <table>
+            <thead>
+                <tr>
+                    <th class="question-column">Pregunta</th>
+                    <th class="options-column">1<br>Ninguna dificultad</th>
+                    <th class="options-column">2<br>Poca dificultad</th>
+                    <th class="options-column">3<br>Dificultad moderada</th>
+                    <th class="options-column">4<br>Mucha dificultad</th>
+                    <th class="options-column">5<br>Incapaz</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Pregunta 11 -->
+                <tr>
+                    <td>11) ¿Cuánta dificultad ha tenido para dormir a causa del dolor de brazo, hombro o mano durante la semana pasada?</td>
+                    <td class="options-column"><input type="radio" name="q11" value="1"></td>
+                    <td class="options-column"><input type="radio" name="q11" value="2"></td>
+                    <td class="options-column"><input type="radio" name="q11" value="3"></td>
+                    <td class="options-column"><input type="radio" name="q11" value="4"></td>
+                    <td class="options-column"><input type="radio" name="q11" value="5"></td>
+                </tr>
+            </tbody>
+        </table>
+    </form>
+
+    <div class="result-container">
+        Índice de funcionalidad: <span id="result">--</span>
+    </div>
+    <p>El índice de funcionalidad va de 0 (ninguna discapacidad) a 100 (discapacidad severa).</p>
+
+    <button type="button" id="calculateBtn" style="margin-bottom: 20px;">Calcular resultado</button>
+
+    <div class="export-buttons">
+        <button id="exportPdf">Exportar como PDF</button>
+        <button id="exportExcel">Exportar como Excel</button>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+
+    <script>
+        document.getElementById('calculateBtn').addEventListener('click', calculateScore);
+        document.getElementById('exportPdf').addEventListener('click', exportAsPdf);
+        document.getElementById('exportExcel').addEventListener('click', exportAsExcel);
+
+        function calculateScore() {
+            const form = document.getElementById('disabilityForm');
+            let totalScore = 0;
+            let answeredQuestions = 0;
+
+            for (let i = 1; i <= 11; i++) {
+                const value = form.elements[`q${i}`].value;
+                if (value) {
+                    totalScore += parseInt(value, 10);
+                    answeredQuestions++;
+                }
+            }
+
+            if (answeredQuestions > 0) {
+                const oldResult = ((totalScore / answeredQuestions) - 1) * 25;
+                const functionalIndex = 100 - oldResult;
+                document.getElementById('result').textContent = functionalIndex.toFixed(2) + '%';
+            } else {
+                document.getElementById('result').textContent = '--';
+            }
+        }
+
+        function exportAsPdf() {
+            const { jsPDF } = window.jspdf;
+            const formContainer = document.querySelector('body');
+            html2canvas(formContainer).then(canvas => {
+                const imgData = canvas.toDataURL('image/png');
+                const pdf = new jsPDF('p', 'mm', 'a4');
+                const pdfWidth = pdf.internal.pageSize.getWidth();
+                const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
+                pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
+                pdf.save("cuestionario-funcionalidad.pdf");
+            });
+        }
+
+        function exportAsExcel() {
+            const form = document.getElementById('disabilityForm');
+            const result = document.getElementById('result').textContent;
+            const data = [];
+
+            data.push(["Pregunta", "Respuesta"]);
+
+            for (let i = 1; i <= 11; i++) {
+                const questionElement = document.querySelector(`input[name="q${i}"]`);
+                const questionText = questionElement.closest('tr').querySelector('td').textContent;
+                const selectedValue = form.elements[`q${i}`].value;
+                data.push([questionText, selectedValue || "No contestada"]);
+            }
+
+            data.push([]);
+            data.push(["Índice de funcionalidad", result]);
+
+            const worksheet = XLSX.utils.aoa_to_sheet(data);
+            const workbook = XLSX.utils.book_new();
+            XLSX.utils.book_append_sheet(workbook, worksheet, "Resultados");
+            XLSX.writeFile(workbook, "cuestionario-funcionalidad.xlsx");
+        }
+    </script>
+</body>
+</html>
