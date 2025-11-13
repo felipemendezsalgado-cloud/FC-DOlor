@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mapa de Dolor</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .drawing-row {
+            display: flex;
+            flex-direction: row;
+            align-items: flex-start;
+            gap: 16px;
+            width: 100%;
+            max-width: 900px;
+        }
+        .drawing-area {
+            position: relative;
+            margin-top: 20px;
+        }
+        #canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            cursor: crosshair;
+        }
+        .color-palette {
+            display: flex;
+            margin-top: 10px;
+            gap: 10px;
+        }
+        .color-option {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            cursor: pointer;
+            border: 2px solid #ccc;
+        }
+        .eraser-option {
+            width: 30px;
+            height: 30px;
+            cursor: pointer;
+            border: 2px solid #ccc;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .color-option.active, .eraser-option.active {
+            border: 2px solid #000;
+        }
+        .controls {
+            margin-top: 10px;
+            display: flex;
+            gap: 10px;
+        }
+        .color-legend {
+            margin-top: 20px;
+            width: 260px;
+            flex: 0 0 260px;
+        }
+        .legend-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 5px;
+        }
+        .legend-color {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+        button {
+            padding: 8px 15px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .brush-size {
+            display: flex;
+            align-items: center;
+            margin-top: 10px;
+        }
+        .brush-size label {
+            margin-right: 10px;
+        }
+        .patient-info {
+            margin-top: 10px;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+        }
+        .patient-info label {
+            margin-right: 10px;
+        }
+        .patient-info input {
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            width: 250px;
+        }
+        @media (max-width: 768px) {
+            .drawing-row {
+                flex-direction: column;
+                max-width: 100%;
+            }
+            .color-legend {
+                width: 100%;
+                flex: 0 0 auto;
+            }
+        }
+    </style>
+    <!-- jsPDF para exportar a PDF -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+</head>
+<body>
+    <h1>Mapa de Dolor</h1>
+    
+    <div class="container">
+        <div class="drawing-row">
+            <div class="drawing-area">
+                <img id="bodyImage" src="cuerpo.png" alt="Imagen del cuerpo humano">
+                <canvas id="canvas"></canvas>
+            </div>
+            <div class="color-legend">
+                <h3>Leyenda de Colores</h3>
+                <div class="legend-item">
+                    <div class="legend-color" style="background-color: #C00000;"></div>
+                    <span>Dolor agudo, sensación de puñalada</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color" style="background-color: #FFC000;"></div>
+                    <span>Dolor difuso, difícil de localizar</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color" style="background-color: #0070c0;"></div>
+                    <span>Sensación de calor o frío</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color" style="background-color: #00B050;"></div>
+                    <span>Sensación de hormigueo o pinchazo de aguja</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color" style="background-color: #000000;"></div>
+                    <span>Anestesia o disminución de sensibilidad</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color" style="background-color: #BF4E14;"></div>
+                    <span>Sensación de rigidez, fatiga o cansancio</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="brush-size">
+            <label for="brushSize">Tamaño del pincel:</label>
+            <input type="range" id="brushSize" min="1" max="20" value="5">
+            <span id="brushSizeValue">5</span>
+        </div>
+        
+        <div class="patient-info">
+            <label for="patientName">Nombre del paciente:</label>
+            <input type="text" id="patientName" placeholder="Ingrese el nombre del paciente">
+        </div>
+        
+        <div class="color-palette">
+            <div class="color-option active" style="background-color: #C00000;" data-color="#C00000"></div>
+            <div class="color-option" style="background-color: #FFC000;" data-color="#FFC000"></div>
+            <div class="color-option" style="background-color: #0070c0;" data-color="#0070c0"></div>
+            <div class="color-option" style="background-color: #00b050;" data-color="#00b050"></div>
+            <div class="color-option" style="background-color: #000000;" data-color="#000000"></div>
+            <div class="color-option" style="background-color: #BF4E14;" data-color="#BF4E14"></div>
+            <div class="eraser-option" data-color="eraser"><img src="eraser.svg" alt="Borrador" width="24" height="24"></div>
+        </div>
+        
+        <div class="controls">
+            <button id="clearBtn">Limpiar</button>
+            <button id="exportPdfBtn">Exportar como PDF</button>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const canvas = document.getElementById('canvas');
+            const bodyImage = document.getElementById('bodyImage');
+            const ctx = canvas.getContext('2d');
+            const clearBtn = document.getElementById('clearBtn');
+            const exportPdfBtn = document.getElementById('exportPdfBtn');
+            const patientNameInput = document.getElementById('patientName');
+            const brushSizeInput = document.getElementById('brushSize');
+            const brushSizeValue = document.getElementById('brushSizeValue');
+            const colorOptions = document.querySelectorAll('.color-option, .eraser-option');
+            
+            let isDrawing = false;
+            let currentColor = '#C00000';
+            let brushSize = 5;
+            let isEraser = false;
+            
+            // Esperar a que la imagen se cargue para configurar el canvas
+            bodyImage.onload = function() {
+                canvas.width = bodyImage.width;
+                canvas.height = bodyImage.height;
+                clearCanvas();
+            };
+            
+            // Configurar el canvas si la imagen ya está cargada
+            if (bodyImage.complete) {
+                canvas.width = bodyImage.width;
+                canvas.height = bodyImage.height;
+                clearCanvas();
+            }
+            
+            // Actualizar el tamaño del pincel
+            brushSizeInput.addEventListener('input', function() {
+                brushSize = this.value;
+                brushSizeValue.textContent = brushSize;
+            });
+            
+            // Selección de color o borrador
+            colorOptions.forEach(option => {
+                option.addEventListener('click', function() {
+                    // Quitar la clase active de todas las opciones
+                    colorOptions.forEach(opt => opt.classList.remove('active'));
+                    // Agregar la clase active a la opción seleccionada
+                    this.classList.add('active');
+                    // Actualizar el color actual o activar borrador
+                    const colorValue = this.getAttribute('data-color');
+                    
+                    if (colorValue === 'eraser') {
+                        isEraser = true;
+                    } else {
+                        isEraser = false;
+                        currentColor = colorValue;
+                    }
+                });
+            });
+            
+            // Eventos de dibujo
+            canvas.addEventListener('mousedown', startDrawing);
+            canvas.addEventListener('mousemove', draw);
+            canvas.addEventListener('mouseup', stopDrawing);
+            canvas.addEventListener('mouseout', stopDrawing);
+            
+            // Eventos táctiles para dispositivos móviles
+            canvas.addEventListener('touchstart', handleTouchStart);
+            canvas.addEventListener('touchmove', handleTouchMove);
+            canvas.addEventListener('touchend', stopDrawing);
+            
+            // Botón para limpiar el canvas
+            clearBtn.addEventListener('click', clearCanvas);
+            
+            // Botón para exportar a PDF
+            exportPdfBtn.addEventListener('click', exportDrawingPDF);
+            
+            function startDrawing(e) {
+                isDrawing = true;
+                draw(e);
+            }
+            
+            function draw(e) {
+                if (!isDrawing) return;
+                
+                // Obtener coordenadas del mouse o toque
+                const x = e.clientX - canvas.getBoundingClientRect().left;
+                const y = e.clientY - canvas.getBoundingClientRect().top;
+                
+                // Verificar si el punto está dentro de la imagen
+                if (isPointInImage(x, y)) {
+                    // Configurar el modo de borrado o dibujo
+                    if (isEraser) {
+                        ctx.globalCompositeOperation = 'destination-out';
+                    } else {
+                        ctx.globalCompositeOperation = 'source-over';
+                        ctx.fillStyle = currentColor;
+                    }
+                    
+                    // Dibujar un círculo en la posición actual
+                    ctx.beginPath();
+                    ctx.arc(x, y, brushSize, 0, Math.PI * 2);
+                    ctx.fill();
+                }
+            }
+            
+            // Función para verificar si un punto está dentro de la imagen
+            function isPointInImage(x, y) {
+                // Obtener los datos de la imagen
+                const imageData = ctx.getImageData(x, y, 1, 1).data;
+                // Si el pixel es completamente transparente, está fuera de la imagen
+                return x >= 0 && y >= 0 && x <= canvas.width && y <= canvas.height;
+            }
+            
+            function handleTouchStart(e) {
+                e.preventDefault();
+                isDrawing = true;
+                handleTouchMove(e);
+            }
+            
+            function handleTouchMove(e) {
+                e.preventDefault();
+                if (!isDrawing) return;
+                
+                const touch = e.touches[0];
+                const x = touch.clientX - canvas.getBoundingClientRect().left;
+                const y = touch.clientY - canvas.getBoundingClientRect().top;
+                
+                // Verificar si el punto está dentro de la imagen
+                if (isPointInImage(x, y)) {
+                    // Configurar el modo de borrado o dibujo
+                    if (isEraser) {
+                        ctx.globalCompositeOperation = 'destination-out';
+                    } else {
+                        ctx.globalCompositeOperation = 'source-over';
+                        ctx.fillStyle = currentColor;
+                    }
+                    
+                    ctx.beginPath();
+                    ctx.arc(x, y, brushSize, 0, Math.PI * 2);
+                    ctx.fill();
+                }
+            }
+            
+            function stopDrawing() {
+                isDrawing = false;
+            }
+            
+            function clearCanvas() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+            }
+            
+            function exportDrawingPDF() {
+                const { jsPDF } = window.jspdf;
+                if (!jsPDF) {
+                    alert('No se pudo cargar jsPDF. Verifique su conexión.');
+                    return;
+                }
+
+                // Obtener el nombre del paciente
+                const patientName = patientNameInput.value.trim() || 'paciente';
+
+                // Crear un canvas temporal para combinar la imagen y el dibujo
+                const tempCanvas = document.createElement('canvas');
+                const tempCtx = tempCanvas.getContext('2d');
+                tempCanvas.width = canvas.width;
+                tempCanvas.height = canvas.height;
+
+                // Dibujar la imagen original y el dibujo
+                tempCtx.drawImage(bodyImage, 0, 0, canvas.width, canvas.height);
+                tempCtx.drawImage(canvas, 0, 0);
+
+                const dataUrl = tempCanvas.toDataURL('image/png');
+
+                // Crear PDF A4 en mm
+                const doc = new jsPDF({ orientation: 'portrait', unit: 'mm', format: 'a4' });
+                const pageWidth = doc.internal.pageSize.getWidth();
+                const pageHeight = doc.internal.pageSize.getHeight();
+                const margin = 10; // mm
+                const maxWidth = pageWidth - margin * 2;
+
+                // Calcular tamaño manteniendo proporción
+                const imgWidthPx = tempCanvas.width;
+                const imgHeightPx = tempCanvas.height;
+                const aspect = imgHeightPx / imgWidthPx;
+
+                let renderWidth = maxWidth;
+                let renderHeight = renderWidth * aspect;
+                if (renderHeight > pageHeight - margin * 2) {
+                    renderHeight = pageHeight - margin * 2;
+                    renderWidth = renderHeight / aspect;
+                }
+
+                const x = (pageWidth - renderWidth) / 2;
+                const y = (pageHeight - renderHeight) / 2;
+
+                doc.addImage(dataUrl, 'PNG', x, y, renderWidth, renderHeight);
+                doc.save(`mapa_dolor_${patientName}.pdf`);
+            }
+        });
+    </script>
+</body>
+</html>
